@@ -23,18 +23,21 @@ TPoro::TPoro(int x, int y, double vol, char* color) {
 	this->x = x;
 	this->y = y;
 	volumen = vol;
-	this->color = color;
+
 }
 
-TPoro::TPoro(TPoro& poro) {
+TPoro::TPoro(const TPoro& poro) {
 	Copy(poro);
 }
 
 TPoro::~TPoro() {
-	x = 0;
-	y = 0;
-	volumen = 0;
-	color = NULL;	//¿Se iguala a null o se deja apuntando a la posición de memoria a la que estaba?
+	x = y = volumen = 0;
+	if(color != NULL){
+		delete color;	//Se borra
+		color = NULL;
+	}
+
+
 }
 
 TPoro& TPoro::operator =(const TPoro &p) {

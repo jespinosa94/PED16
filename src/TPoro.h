@@ -28,7 +28,7 @@ public:
 	// Constructor a partir de una posición, un volumen y un color
 	TPoro(int, int, double, char *);
 	// Constructor de copia
-	TPoro(TPoro &);
+	TPoro(const TPoro &);
 	// Destructor
 	~TPoro();
 	// Sobrecarga del operador asignación

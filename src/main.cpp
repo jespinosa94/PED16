@@ -7,7 +7,9 @@
 #include <iostream>
 #include "TPoro.h"
 using namespace std;
-
+/*-Si no se va a modificar la variable de dentro de la función poner const
+ *-Si no se va a modificar ningún valor dentro de la funcion poner const al final de la funcion
+ */
 int main(){
 	TPoro p1;
 	TPoro p2(1, 2, 3.2432423);
