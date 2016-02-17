@@ -1,9 +1,14 @@
+#include <iostream>
+#include <cstring>
+using namespace std;
+
+
 #ifndef SRC_TPORO_H_
 #define SRC_TPORO_H_
 
 class TPoro {
 	// Sobrecarga del operador SALIDA
-	friend ostream & operator<<(ostream &, TPoro &);
+	friend ostream & operator<<(ostream &, const TPoro &);
 private:
 	// Coordenada x de la posición
 	int x;
@@ -13,6 +18,7 @@ private:
 	double volumen;
 	// Color
 	char* color;
+	void Copy(const TPoro &p);
 
 public:
 	// Constructor por defecto
@@ -26,12 +32,12 @@ public:
 	// Destructor
 	~TPoro();
 	// Sobrecarga del operador asignación
-	TPoro & operator=(TPoro &);
+	TPoro & operator=(const TPoro &);
 
 	// Sobrecarga del operador igualdad
-	bool operator==(TPoro &);
+	bool operator==(const TPoro &) const;
 	// Sobrecarga del operador desigualdad
-	bool operator!=(TPoro &);
+	bool operator!=(const TPoro &) const;
 	// Modifica la posición
 	void Posicion(int, int);
 	// Modifica el volumen
@@ -47,7 +53,7 @@ public:
 	// Devuelve el color
 	char * Color();
 	// Devuelve cierto si el poro está vacío
-	bool EsVacio();
+	bool EsVacio() const;
 };
 
 #endif /* SRC_TPORO_H_ */
