@@ -8,8 +8,7 @@
 #include "TPoro.h"
 
 TPoro::TPoro() {
-	x = y = 0;
-	volumen = 0;
+	x = y = volumen = 0;
 	color = NULL;
 }
 
@@ -17,27 +16,29 @@ TPoro::TPoro(int x, int y, double vol) {
 	this->x = x;
 	this->y = y;
 	volumen = vol;
+	color = NULL;
 }
 
-TPoro::TPoro(int x, int y, double vol, char* color) {
+TPoro::TPoro(int x, int y, double vol, char* c) {
 	this->x = x;
 	this->y = y;
 	volumen = vol;
-
+	color = new char[strlen(c) + 1];
+	if(color == NULL)
+		return;
+	strcpy(color, c);
 }
 
-TPoro::TPoro(const TPoro& poro) {
+TPoro::TPoro(const TPoro &poro) {
 	Copy(poro);
 }
 
 TPoro::~TPoro() {
 	x = y = volumen = 0;
 	if(color != NULL){
-		delete color;	//Se borra
+		delete color;	//Se libera la memoria
 		color = NULL;
 	}
-
-
 }
 
 TPoro& TPoro::operator =(const TPoro &p) {
@@ -50,7 +51,9 @@ TPoro& TPoro::operator =(const TPoro &p) {
 }
 
 bool TPoro::operator ==(const TPoro &p) const {
-	return (x==p.x && y==p.y && volumen==p.volumen && color==p.color);
+	bool temp;
+	temp = (x==p.x && y==p.y && volumen==p.volumen && !strcmp(color, p.color)) ? true : false;
+	return temp;
 }
 
 bool TPoro::operator !=(const TPoro &p) const {
@@ -86,12 +89,14 @@ void TPoro::Copy(const TPoro& p) {
 	x = p.x;
 	y = p.y;
 	volumen = p.volumen;
-	color = p.color;	//Si falla en las pruebas cambiarlo por (comprobar si color es null, si lo es igualar el nuevo a null y
-						//con strcpy copiar el color
+	color = new char[strlen(p.color) + 1];
+	if(color == NULL)
+		return;
+	strcpy(color, p.color);
 }
 
 bool TPoro::EsVacio() const{
-	return (x==0 && y==0 && volumen==0 && color==NULL);
+	return(x==0 && y==0 && volumen==0 && color==NULL);
 }
 
 ostream& operator<<(ostream &os, const TPoro &p){

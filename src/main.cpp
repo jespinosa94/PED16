@@ -5,6 +5,7 @@
  *      Author: jorge
  */
 #include <iostream>
+#include <cstring>
 #include "TPoro.h"
 using namespace std;
 /*-Si no se va a modificar la variable de dentro de la función poner const
@@ -32,6 +33,7 @@ int main(){
 	p2 = p1;
 	cout << p1;
 	cout << p2;
+
 }
 
 
