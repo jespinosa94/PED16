@@ -23,10 +23,12 @@ TPoro::TPoro(int x, int y, double vol, char* c) {
 	this->x = x;
 	this->y = y;
 	volumen = vol;
-	color = new char[strlen(c) + 1];
-	if(color == NULL)
-		return;
-	strcpy(color, c);
+	if(c == NULL)
+		color = NULL;
+	else{
+		color = new char[strlen(c) + 1];
+		strcpy(color, c);
+	}
 }
 
 TPoro::TPoro(const TPoro &poro) {
@@ -89,10 +91,13 @@ void TPoro::Copy(const TPoro& p) {
 	x = p.x;
 	y = p.y;
 	volumen = p.volumen;
-	color = new char[strlen(p.color) + 1];
-	if(color == NULL)
-		return;
-	strcpy(color, p.color);
+	if(p.color == NULL)
+		color = NULL;
+	else
+	{
+		color = new char[strlen(p.color) + 1];
+		strcpy(color, p.color);
+	}
 }
 
 bool TPoro::EsVacio() const{
