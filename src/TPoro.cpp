@@ -20,6 +20,7 @@ TPoro::TPoro(int x, int y, double vol) {
 }
 
 TPoro::TPoro(int x, int y, double vol, char* c) {
+	VerifyLowerCase(c);
 	this->x = x;
 	this->y = y;
 	volumen = vol;
@@ -62,13 +63,24 @@ bool TPoro::operator !=(const TPoro &p) const {
 	return ! (*this==p);
 }
 
-void TPoro::Posicion(int int1, int int2) {
+void TPoro::Posicion(int newX, int newY) {
+	x = newX;
+	y = newY;
 }
 
-void TPoro::Volumen(double double1) {
+void TPoro::Volumen(double newVol) {
+	volumen = newVol;
 }
 
-void TPoro::Color(char*) {
+void TPoro::Color(char *newColor) {
+	VerifyLowerCase(newColor);
+	if(newColor == NULL)
+		color = NULL;
+	else
+	{
+		color = new char[strlen(newColor) + 1];
+		strcpy(color, newColor);
+	}
 }
 
 int TPoro::PosicionX() {
@@ -104,11 +116,26 @@ bool TPoro::EsVacio() const{
 	return(x==0 && y==0 && volumen==0 && color==NULL);
 }
 
+void TPoro::VerifyLowerCase(char *&c){
+	char* aux;
+	if(c==NULL)
+		aux = NULL;
+	else
+	{
+		aux = new char[strlen(c) + 1];
+		for(int i=0; i<strlen(c); i++)
+			aux[i] = tolower(c[i]);
+		c = new char[strlen(aux) +1];
+		strcpy(c, aux);
+	}
+
+}
+
 ostream& operator<<(ostream &os, const TPoro &p){
 	if(!p.EsVacio()){
 		os.setf(ios::fixed);
 		os.precision(2);
-		os << "(" << p.x << ", " << p.y << ")";
+		os << "(" << p.x << ", " << p.y << ") " << p.volumen << " ";
 		if(p.color != NULL)
 			os << p.color;
 		else

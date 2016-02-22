@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <cctype>
 using namespace std;
 
 
@@ -18,7 +19,10 @@ private:
 	double volumen;
 	// Color
 	char* color;
+	//Copia todos los atributos de un objeto TPoro a otro
 	void Copy(const TPoro &p);
+	//Comprueba si el color está en minúsculas
+	void VerifyLowerCase(char *&c);
 
 public:
 	// Constructor por defecto
