@@ -5,7 +5,7 @@
  *      Author: jorge
  */
 
-#include "TPoro.h"
+#include "../include/tporo.h"
 
 TPoro::TPoro() {
 	x = y = volumen = 0;

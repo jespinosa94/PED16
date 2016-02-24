@@ -2,7 +2,7 @@
 
 using namespace std;
 
-#include "TPoro.h"
+#include "../include/tporo.h"
 
 int
 main(void)

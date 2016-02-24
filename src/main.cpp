@@ -6,7 +6,7 @@
  */
 #include <iostream>
 #include <cstring>
-#include "TPoro.h"
+#include "../include/tporo.h"
 using namespace std;
 /*-Si no se va a modificar la variable de dentro de la función poner const
  *-Si no se va a modificar ningún valor dentro de la funcion poner const al final de la funcion
