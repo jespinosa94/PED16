@@ -43,6 +43,18 @@ int main(){
 
 cout << p1 << endl << p2 << endl << p3 << endl << p4 << endl << p6 << endl;
 
+cout << "________________________PRUEBAS DE TVectorPoro________________________\n";
+
+TVectorPoro t1;
+TVectorPoro t2(-5);
+TVectorPoro t3(4);
+TVectorPoro t4(3);
+t3[3] = p2;
+t4[1] = p2;
+t4[2] = p3;
+t4[3] = p4;
+cout << t1 << endl << t2 << endl << t3 << endl;
+cout << t1.Cantidad() << endl << t2.Cantidad() << endl << t3.Cantidad() << endl << t4.Cantidad();
 }
 
 

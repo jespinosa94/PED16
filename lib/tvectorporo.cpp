@@ -39,7 +39,7 @@ TVectorPoro::~TVectorPoro() {
 	dimension = 0;
 	if(datos != NULL)
 	{
-		delete datos;
+		datos->~TPoro();
 		datos = NULL;
 	}
 }
@@ -51,7 +51,7 @@ TVectorPoro& TVectorPoro::operator =(const TVectorPoro &tvp) {
 		{
 			dimension = tvp.dimension;
 			if(datos != NULL)
-				delete datos;
+				datos->~TPoro(); /*Si peta en algo cambiarlo*/
 			datos = new TPoro[dimension];
 			if(datos == NULL)
 			{
@@ -80,13 +80,13 @@ bool TVectorPoro::operator !=(const TVectorPoro &tvp) {
 
 TPoro& TVectorPoro::operator [](int posicion) {
 	if(posicion>=1 && posicion<=dimension)
-		return datos[dimension-1];
+		return datos[posicion-1];
 	return error;
 }
 
 TPoro TVectorPoro::operator [](int posicion) const {
 	if(posicion>=1 && posicion<=dimension)
-		return datos[dimension-1];
+		return datos[posicion-1];
 	return error;
 }
 
@@ -95,6 +95,12 @@ int TVectorPoro::Longitud() {
 }
 
 int TVectorPoro::Cantidad() {
+	int posOcupadas = 0;
+	for(int i=0; i<dimension; i++){
+		if(!datos[i].EsVacio())
+			posOcupadas+=1;
+	}
+	return posOcupadas;
 }
 
 bool TVectorPoro::Redimensionar(int int1) {
@@ -105,11 +111,11 @@ ostream & operator <<(ostream &os, const TVectorPoro &tvp){
 
 	if(tvp.dimension > 0)
 	{
-		os << 0 << " ";
-		os << tvp.datos[0];
-		for(int i=1; i<tvp.dimension; i++)
+		os << 1 << " ";
+		os << tvp.operator[](1);
+		for(int i=2; i<=tvp.dimension; i++)
 		{
-			os << " " << i << " " << tvp.datos[i];
+			os << " " << i << " " << tvp.operator [](i);
 		}
 	}
 
