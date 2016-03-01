@@ -103,7 +103,33 @@ int TVectorPoro::Cantidad() {
 	return posOcupadas;
 }
 
-bool TVectorPoro::Redimensionar(int int1) {
+bool TVectorPoro::Redimensionar(int newSize) {
+	if(newSize<=0 || dimension==newSize)
+		return false;
+	else if(dimension<newSize)
+	{
+		TVectorPoro aux;
+		aux.dimension = newSize;
+		aux.datos = new TPoro[aux.dimension];
+		for(int i=0; i<dimension; i++)
+			aux.datos[i] = datos[i];
+		(*this).~TVectorPoro();
+		(*this) = aux;
+	}
+	/*
+	 *la nueva longitud es menor que la actual y se eliminan los elementos de la derecha
+	 */
+	else
+	{
+		TVectorPoro aux;
+		aux.dimension = newSize;
+		aux.datos = new TPoro[aux.dimension];
+		for(int i=0; i<newSize; i++)
+			aux.datos[i] = datos[i];
+		(*this).~TVectorPoro();
+		(*this) = aux;
+	}
+	return true;
 }
 
 ostream & operator <<(ostream &os, const TVectorPoro &tvp){

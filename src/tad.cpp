@@ -53,8 +53,21 @@ t3[3] = p2;
 t4[1] = p2;
 t4[2] = p3;
 t4[3] = p4;
-cout << t1 << endl << t2 << endl << t3 << endl;
-cout << t1.Cantidad() << endl << t2.Cantidad() << endl << t3.Cantidad() << endl << t4.Cantidad();
+cout << t1 << endl << t2 << endl << t3 << endl << t4 << endl;
+cout << t1.Cantidad() << ", " << t2.Cantidad() << ", " << t3.Cantidad() << ", " << t4.Cantidad() << endl;
+
+t3 = t4;
+cout << t3 << endl;
+
+if(!t4.Redimensionar(3))
+	cout << "P4- OK\n";	else	cout << "P4- NOPE\n";
+if(!t4.Redimensionar(-3))
+	cout << "P5- OK\n";	else	cout << "P5- NOPE\n";
+if(t4.Redimensionar(5))
+	cout << "P6- OK\n";	else	cout << "P6- NOPE\n";
+if(t4.Redimensionar(2))
+	cout << "P6- OK\n";	else	cout << "P6- NOPE\n";
+cout << t4 << endl;
 }
 
 
