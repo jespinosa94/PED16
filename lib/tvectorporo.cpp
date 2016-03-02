@@ -81,12 +81,16 @@ bool TVectorPoro::operator !=(const TVectorPoro &tvp) {
 TPoro& TVectorPoro::operator [](int posicion) {
 	if(posicion>=1 && posicion<=dimension)
 		return datos[posicion-1];
+	//Vaciar el TPoro error para asegurar que antes no se le ha asignado ningún TPoro
+	error.~TPoro();
 	return error;
 }
 
 TPoro TVectorPoro::operator [](int posicion) const {
 	if(posicion>=1 && posicion<=dimension)
 		return datos[posicion-1];
+	//Vaciar el TPoro error para asegurar que antes no se le ha asignado ningún TPoro
+	error.~TPoro();
 	return error;
 }
 

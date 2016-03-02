@@ -11,42 +11,84 @@
  ***************************************************TListaNodo**************************************************
  ****************************************************************************************************************/
 TListaNodo::TListaNodo() {
+	anterior = NULL;
+	siguiente = NULL;
 }
 
 TListaNodo::TListaNodo(const TListaNodo &tln) {
+	e = tln.e;
+	anterior = NULL;
+	siguiente = NULL;
 }
 
 TListaNodo::~TListaNodo() {
+	e.~TPoro();
+	if(anterior != NULL)
+		anterior = NULL;
+	if(siguiente != NULL)
+		siguiente = NULL;
 }
 
-TListaNodo& TListaNodo::operator =(TListaNodo&) {
+TListaNodo& TListaNodo::operator =(const TListaNodo &tln) {
+	if(this != &tln)
+	{
+		e = tln.e;
+		anterior->e = tln.anterior->e;
+		siguiente->e = tln.siguiente->e;
+	}
 }
 
 /***************************************************************************************************************
  ***************************************************TListaPosicion**********************************************
  ****************************************************************************************************************/
 TListaPosicion::TListaPosicion() {
+	pos = NULL;
 }
 
-TListaPosicion::TListaPosicion(TListaPosicion&) {
+TListaPosicion::TListaPosicion(const TListaPosicion &tlp) {
+	if(tlp.pos != NULL)
+		pos = tlp.pos;
+	else
+		pos = NULL;
 }
 
 TListaPosicion::~TListaPosicion() {
+	if(pos!=NULL)
+		pos = NULL;
 }
 
-TListaPosicion& TListaPosicion::operator =(TListaPosicion&) {
+TListaPosicion& TListaPosicion::operator =(const TListaPosicion &tlp) {
+	if(this != &tlp)
+	{
+		if(tlp.pos != NULL)
+			pos = tlp.pos;
+	}
+	return *this;
 }
 
-bool TListaPosicion::operator ==(TListaPosicion&) {
+bool TListaPosicion::operator ==(const TListaPosicion &tlp) const {
+	if(pos == tlp.pos)
+		return true;
+	return false;
 }
 
-TListaPosicion TListaPosicion::Anterior() {
+TListaPosicion TListaPosicion::Anterior(){
+	TListaPosicion aux;
+	if(pos->anterior != NULL)
+		aux.pos = pos->anterior;
+
+	return aux;
 }
 
-TListaPosicion TListaPosicion::Siguiente() {
+TListaPosicion TListaPosicion::Siguiente(){
+	TListaPosicion aux;
+	if(pos->siguiente != NULL)
+		aux.pos = pos->siguiente;
+	return aux;
 }
 
-bool TListaPosicion::EsVacia() {
+bool TListaPosicion::EsVacia() const{
+	return pos == NULL;
 }
 
 /***************************************************************************************************************
@@ -55,16 +97,16 @@ bool TListaPosicion::EsVacia() {
 TListaPoro::TListaPoro() {
 }
 
-TListaPoro::TListaPoro(TListaPoro&) {
+TListaPoro::TListaPoro(TListaPoro &) {
 }
 
 TListaPoro::~TListaPoro() {
 }
 
-TListaPoro& TListaPoro::operator =(TListaPoro&) {
+TListaPoro& TListaPoro::operator =(const TListaPoro&) {
 }
 
-bool TListaPoro::operator ==(TListaPoro&) {
+bool TListaPoro::operator ==(const TListaPoro&) const{
 }
 
 TListaPoro TListaPoro::operator +(TListaPoro&) {
@@ -73,10 +115,10 @@ TListaPoro TListaPoro::operator +(TListaPoro&) {
 TListaPoro TListaPoro::operator -(TListaPoro&) {
 }
 
-bool TListaPoro::EsVacia() {
+bool TListaPoro::EsVacia() const{
 }
 
-bool TListaPoro::Insertar(TPoro&) {
+bool TListaPoro::Insertar(const TPoro&) {
 }
 
 bool TListaPoro::Borrar(TPoro&) {
@@ -85,13 +127,13 @@ bool TListaPoro::Borrar(TPoro&) {
 bool TListaPoro::Borrar(TListaPosicion&) {
 }
 
-TPoro TListaPoro::Obtener(TListaPosicion&) {
+TPoro TListaPoro::Obtener(const TListaPosicion&) {
 }
 
-bool TListaPoro::Buscar(TPoro&) {
+bool TListaPoro::Buscar(const TPoro&) {
 }
 
-int TListaPoro::Longitud() {
+int TListaPoro::Longitud() const{
 }
 
 TListaPosicion TListaPoro::Primera() {

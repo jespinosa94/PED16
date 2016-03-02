@@ -9,6 +9,7 @@
 #ifndef INCLUDE_TLISTAPORO_H_
 #define INCLUDE_TLISTAPORO_H_
 class TListaNodo {
+	friend class TListaPosicion;
 private:
 	// El elemento del nodo
 	TPoro e;
@@ -25,7 +26,7 @@ public:
 	// Destructor
 	~TListaNodo ();
 	// Sobrecarga del operador asignación
-	TListaNodo & operator=( TListaNodo &);
+	TListaNodo & operator=(const TListaNodo &);
 };
 
 class TListaPosicion {
@@ -36,20 +37,20 @@ public:
 	// Constructor por defecto
 	TListaPosicion ();
 	// Constructor de copia
-	TListaPosicion (TListaPosicion &);
+	TListaPosicion (const TListaPosicion &);
 	// Destructor
 	~TListaPosicion ();
 	// Sobrecarga del operador asignación
-	TListaPosicion& operator=( TListaPosicion &);
+	TListaPosicion& operator=(const TListaPosicion &);
 
 	// Sobrecarga del operador igualdad
-	bool operator==( TListaPosicion &);
+	bool operator==(const TListaPosicion &) const;
 	// Devuelve la posición anterior
 	TListaPosicion Anterior();
 	// Devuelve la posición siguiente
 	TListaPosicion Siguiente();
 	// Devuelve TRUE si la posición no apunta a una lista, FALSE en caso contrario
-	bool EsVacia();
+	bool EsVacia() const;
 };
 class TListaPoro {
 private:
@@ -65,28 +66,28 @@ public:
 	// Destructor
 	~TListaPoro ();
 	// Sobrecarga del operador asignación
-	TListaPoro & operator=( TListaPoro &);
+	TListaPoro & operator=(const TListaPoro &);
 
 	// Sobrecarga del operador igualdad
-	bool operator==(TListaPoro &);
+	bool operator==(const TListaPoro &) const;
 	// Sobrecarga del operador suma
 	TListaPoro operator+(TListaPoro &);
 	// Sobrecarga del operador resta
 	TListaPoro operator-(TListaPoro &);
 	// Devuelve true si la lista está vacía, false en caso contrario
-	bool EsVacia();
+	bool EsVacia() const;
 	// Inserta el elemento en la lista
-	bool Insertar(TPoro &);
+	bool Insertar(const TPoro &);
 	// Busca y borra el elemento
 	bool Borrar(TPoro &);
 	// Borra el elemento que ocupa la posición indicada
 	bool Borrar(TListaPosicion &);
 	// Obtiene el elemento que ocupa la posición indicada
-	TPoro Obtener(TListaPosicion &);
+	TPoro Obtener(const TListaPosicion &);
 	// Devuelve true si el elemento está en la lista, false en caso contrario
-	bool Buscar(TPoro &);
+	bool Buscar(const TPoro &);
 	// Devuelve la longitud de la lista
-	int Longitud();
+	int Longitud() const;
 	// Devuelve la primera posición en la lista
 	TListaPosicion Primera();
 	// Devuelve la última posición en la lista
