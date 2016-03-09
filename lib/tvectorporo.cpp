@@ -51,7 +51,7 @@ TVectorPoro& TVectorPoro::operator =(const TVectorPoro &tvp) {
 		{
 			dimension = tvp.dimension;
 			if(datos != NULL)
-				datos->~TPoro(); /*Si peta en algo cambiarlo*/
+				datos->~TPoro();
 			datos = new TPoro[dimension];
 			if(datos == NULL)
 			{

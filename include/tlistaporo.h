@@ -10,6 +10,7 @@
 #define INCLUDE_TLISTAPORO_H_
 class TListaNodo {
 	friend class TListaPosicion;
+	friend class TListaPoro;
 private:
 	// El elemento del nodo
 	TPoro e;
@@ -53,16 +54,20 @@ public:
 	bool EsVacia() const;
 };
 class TListaPoro {
+	// Sobrecarga del operador salida
+	friend ostream & operator<<(ostream &, TListaPoro &);
 private:
 	// Primer elemento de la lista
 	TListaNodo *primero;
 	// Ultimo elemento de la lista
 	TListaNodo *ultimo;
+	bool BuscaLista(const TPoro &);
+	void InsertaCabeza(const TPoro &);
 public:
 	// Constructor por defecto
 	TListaPoro();
 	// Constructor de copia
-	TListaPoro (TListaPoro &);
+	TListaPoro (const TListaPoro &);
 	// Destructor
 	~TListaPoro ();
 	// Sobrecarga del operador asignación

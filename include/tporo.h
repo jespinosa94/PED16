@@ -53,7 +53,7 @@ public:
 	// Devuelve la coordenada y de la posición
 	int PosicionY();
 	// Devuelve el volumen
-	double Volumen();
+	double Volumen() const;
 	// Devuelve el color
 	char * Color();
 	// Devuelve cierto si el poro está vacío

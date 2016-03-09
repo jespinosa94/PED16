@@ -10,15 +10,12 @@
 /***************************************************************************************************************
  ***************************************************TListaNodo**************************************************
  ****************************************************************************************************************/
-TListaNodo::TListaNodo() {
-	anterior = NULL;
-	siguiente = NULL;
+TListaNodo::TListaNodo():e() {
+	anterior = siguiente = NULL;
 }
 
-TListaNodo::TListaNodo(const TListaNodo &tln) {
-	e = tln.e;
-	anterior = NULL;
-	siguiente = NULL;
+TListaNodo::TListaNodo(const TListaNodo &tln):e(tln.e) {
+	anterior = siguiente = NULL;
 }
 
 TListaNodo::~TListaNodo() {
@@ -36,6 +33,7 @@ TListaNodo& TListaNodo::operator =(const TListaNodo &tln) {
 		anterior->e = tln.anterior->e;
 		siguiente->e = tln.siguiente->e;
 	}
+	return *this;
 }
 
 /***************************************************************************************************************
@@ -67,9 +65,7 @@ TListaPosicion& TListaPosicion::operator =(const TListaPosicion &tlp) {
 }
 
 bool TListaPosicion::operator ==(const TListaPosicion &tlp) const {
-	if(pos == tlp.pos)
-		return true;
-	return false;
+	return pos == tlp.pos;
 }
 
 TListaPosicion TListaPosicion::Anterior(){
@@ -95,9 +91,10 @@ bool TListaPosicion::EsVacia() const{
  ***************************************************TListaPoro**************************************************
  ****************************************************************************************************************/
 TListaPoro::TListaPoro() {
+	primero = ultimo = NULL;
 }
 
-TListaPoro::TListaPoro(TListaPoro &) {
+TListaPoro::TListaPoro(const TListaPoro &poroLista) {
 }
 
 TListaPoro::~TListaPoro() {
@@ -116,9 +113,37 @@ TListaPoro TListaPoro::operator -(TListaPoro&) {
 }
 
 bool TListaPoro::EsVacia() const{
+	return primero == ultimo == NULL;
 }
 
-bool TListaPoro::Insertar(const TPoro&) {
+bool TListaPoro::BuscaLista(const TPoro &poro) {
+	return false;
+}
+void TListaPoro::InsertaCabeza(const TPoro &poro) {
+	TListaNodo *aux = new TListaNodo;
+	aux->e = poro;
+	aux->siguiente = primero;
+	primero->anterior = aux;
+	aux = primero;
+}
+bool TListaPoro::Insertar(const TPoro &poro) {
+	TListaNodo *nuevoPoro;
+
+	if(EsVacia())
+	{
+		nuevoPoro = new TListaNodo;
+		nuevoPoro->e = poro;
+		primero = nuevoPoro;
+		ultimo = nuevoPoro;
+		return true;
+	}
+	else if(!BuscaLista(poro))
+	{
+		if(poro.Volumen() < primero->e.Volumen())
+			InsertaCabeza(poro);
+		return true;
+	}
+	return false;
 }
 
 bool TListaPoro::Borrar(TPoro&) {
@@ -127,7 +152,8 @@ bool TListaPoro::Borrar(TPoro&) {
 bool TListaPoro::Borrar(TListaPosicion&) {
 }
 
-TPoro TListaPoro::Obtener(const TListaPosicion&) {
+TPoro TListaPoro::Obtener(const TListaPosicion &obtenerPos) {
+	return obtenerPos.pos->e;
 }
 
 bool TListaPoro::Buscar(const TPoro&) {
@@ -137,10 +163,28 @@ int TListaPoro::Longitud() const{
 }
 
 TListaPosicion TListaPoro::Primera() {
+	TListaPosicion aux;
+	if(primero != NULL)
+		aux.pos = primero;
+	else
+		aux.pos = NULL;
+	return aux;
 }
 
 TListaPosicion TListaPoro::Ultima() {
 }
 
 TListaPoro TListaPoro::ExtraerRango(int n1, int n2) {
+}
+
+ostream & operator<<(ostream &os, TListaPoro &lista) {
+	TListaPosicion aux = lista.Primera();
+
+	os << "(";
+	if(!lista.EsVacia())
+	{
+		os << lista.Obtener(aux);
+	}
+	os << ")";
+	return os;
 }

@@ -91,7 +91,7 @@ int TPoro::PosicionY() {
 	return y;
 }
 
-double TPoro::Volumen() {
+double TPoro::Volumen() const {
 	return volumen;
 }
 
