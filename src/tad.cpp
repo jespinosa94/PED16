@@ -108,15 +108,64 @@ int main(){
 //			cout << "P2L- OK\n";
 //		else cout << "P2L- NOPE\N";
 //	}
+//	{
+//		/*
+//		 * Prueba insertar en cabeza y comparar TPoros, también inserta en la lista vacía
+//		 */
+//		TPoro p1;
+//		TPoro p2(1, 2, 3.2432423);
+//		TPoro p3(3, 4, -5.456, "rojo");
+//		TPoro p4(4, 5, 5, "VERDE");
+//		TListaPoro l1;
+//
+//		l1.Insertar(p4);
+//		l1.Insertar(p2);
+//		l1.Insertar(p2);
+//		l1.Insertar(p3);
+//		stringstream buffer;
+//		buffer << l1;
+//		string expected = "((3, 4) -5.46 rojo (1, 2) 3.24 - (4, 5) 5.00 verde)";
+//		if(expected.compare(buffer.str()) == 0)
+//			cout << "P7- OK\n";
+//		else
+//			cout << "P7- NOPE\n";
+//
+//	}
+//	{
+//		/*
+//		 * Prueba insertar en la cola de la lista
+//		 */
+//		TPoro p1;
+//		TPoro p2(1, 2, 3.2432423);
+//		TPoro p3(3, 4, -5.456, "rojo");
+//		TPoro p4(4, 5, 5, "VERDE");
+//		TListaPoro l1;
+//
+//		l1.Insertar(p1);
+//		l1.Insertar(p2);
+//		l1.Insertar(p4);
+//		stringstream p8;
+//		p8 << l1;
+//		string e = "(() (1, 2) 3.24 - (4, 5) 5.00 verde)";
+//		if(e.compare(p8.str()) == 0)
+//			cout << "P8- OK\n";
+//		else
+//			cout << "P8- NOPE\n";
+//	}
 	{
-		TPoro p1;
-		TPoro p2(1, 2, 3.2432423);
-		TPoro p3(3, 4, -5.456, "rojo");
-		TPoro p4(4, 5, 5, "VERDE");
-		TListaPoro l1;
-
-		l1.Insertar(p1);
-		cout << p1 << endl;
+		/*
+		 * Inserción en el centro de la lista
+		 */
+				TPoro p1;
+				TPoro p2(1, 2, 3.2432423);
+				TPoro p3(3, 4, -5.456, "rojo");
+				TPoro p4(4, 5, 5, "VERDE");
+				TListaPoro l1;
+				l1.Insertar(p3);
+				l1.Insertar(p4);
+				l1.Insertar(p1);
+				l1.Insertar(p2);
+				cout << l1;
 	}
 }
 

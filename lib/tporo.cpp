@@ -53,9 +53,19 @@ TPoro& TPoro::operator =(const TPoro &p) {
 	return *this;
 }
 
+/*
+ * Se contempla la posibilidad de que no haya color en algún poro, haciendo imposible el strcmp()
+ */
 bool TPoro::operator ==(const TPoro &p) const {
-	bool temp;
-	temp = (x==p.x && y==p.y && volumen==p.volumen && !strcmp(color, p.color)) ? true : false;
+	bool temp = false;
+	if(color==NULL && p.color==NULL && x==p.x && y==p.y && volumen==p.volumen)
+		temp = true;
+	else if(color!=NULL && p.color!=NULL && x==p.x && y==p.y && volumen==p.volumen)
+	{
+		if(!strcmp(color, p.color))
+			temp = true;
+	}
+
 	return temp;
 }
 

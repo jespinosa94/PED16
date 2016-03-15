@@ -31,6 +31,7 @@ public:
 };
 
 class TListaPosicion {
+	friend class TListaPoro;
 private:
 	// Para implementar la POSICIÓN a NODO de la LISTA de TPoro
 	TListaNodo *pos;
@@ -61,8 +62,11 @@ private:
 	TListaNodo *primero;
 	// Ultimo elemento de la lista
 	TListaNodo *ultimo;
-	bool BuscaLista(const TPoro &);
+	bool RecorreLista(const TPoro &);
 	void InsertaCabeza(const TPoro &);
+	void InsertaCola(const TPoro &);
+	void InsertaCentro(const TPoro &);
+	TListaPosicion ObtenerAnterior(const TPoro &);
 public:
 	// Constructor por defecto
 	TListaPoro();
@@ -88,7 +92,7 @@ public:
 	// Borra el elemento que ocupa la posición indicada
 	bool Borrar(TListaPosicion &);
 	// Obtiene el elemento que ocupa la posición indicada
-	TPoro Obtener(const TListaPosicion &);
+	TPoro Obtener(const TListaPosicion &) const;
 	// Devuelve true si el elemento está en la lista, false en caso contrario
 	bool Buscar(const TPoro &);
 	// Devuelve la longitud de la lista

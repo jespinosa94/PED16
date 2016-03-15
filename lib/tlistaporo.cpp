@@ -98,12 +98,14 @@ TListaPoro::TListaPoro(const TListaPoro &poroLista) {
 }
 
 TListaPoro::~TListaPoro() {
+
 }
 
 TListaPoro& TListaPoro::operator =(const TListaPoro&) {
 }
 
 bool TListaPoro::operator ==(const TListaPoro&) const{
+
 }
 
 TListaPoro TListaPoro::operator +(TListaPoro&) {
@@ -113,34 +115,66 @@ TListaPoro TListaPoro::operator -(TListaPoro&) {
 }
 
 bool TListaPoro::EsVacia() const{
-	return primero == ultimo == NULL;
+	return primero==NULL && ultimo==NULL;
 }
 
-bool TListaPoro::BuscaLista(const TPoro &poro) {
-	return false;
-}
 void TListaPoro::InsertaCabeza(const TPoro &poro) {
 	TListaNodo *aux = new TListaNodo;
 	aux->e = poro;
-	aux->siguiente = primero;
-	primero->anterior = aux;
-	aux = primero;
+	if(EsVacia())
+	{
+		aux->siguiente = NULL;
+		primero = aux;
+		ultimo = aux;
+	}
+	else
+	{
+		aux->siguiente = primero;
+		primero->anterior = aux;
+		primero = aux;
+	}
 }
+
+void TListaPoro::InsertaCola(const TPoro &poro) {
+	TListaNodo *aux = new TListaNodo;
+	aux->e = poro;
+	aux->anterior = ultimo;
+	ultimo->siguiente = aux;
+	ultimo = aux;
+}
+
+TListaPosicion TListaPoro::ObtenerAnterior(const TPoro &poro) {
+	TListaPosicion aux = Primera();
+	while(!aux.Siguiente().EsVacia())
+	{
+		if(aux.pos->e == poro)
+			return aux;
+		else
+			aux = aux.Siguiente();
+	}
+	return aux;
+}
+
+void TListaPoro::InsertaCentro(const TPoro &poro) {
+	TListaPosicion poroAnterior = ObtenerAnterior(poro);
+}
+
 bool TListaPoro::Insertar(const TPoro &poro) {
 	TListaNodo *nuevoPoro;
 
 	if(EsVacia())
 	{
-		nuevoPoro = new TListaNodo;
-		nuevoPoro->e = poro;
-		primero = nuevoPoro;
-		ultimo = nuevoPoro;
+		InsertaCabeza(poro);
 		return true;
 	}
-	else if(!BuscaLista(poro))
+	else if(!Buscar(poro))
 	{
 		if(poro.Volumen() < primero->e.Volumen())
 			InsertaCabeza(poro);
+		else if(poro.Volumen() > ultimo->e.Volumen())
+			InsertaCola(poro);
+		else
+			InsertaCentro(poro);
 		return true;
 	}
 	return false;
@@ -152,11 +186,23 @@ bool TListaPoro::Borrar(TPoro&) {
 bool TListaPoro::Borrar(TListaPosicion&) {
 }
 
-TPoro TListaPoro::Obtener(const TListaPosicion &obtenerPos) {
+TPoro TListaPoro::Obtener(const TListaPosicion &obtenerPos) const {
 	return obtenerPos.pos->e;
 }
 
-bool TListaPoro::Buscar(const TPoro&) {
+bool TListaPoro::Buscar(const TPoro &poro) {
+	if(!EsVacia())
+	{
+		TListaPosicion comparaPos = Primera();
+		while(!comparaPos.Siguiente().EsVacia())
+		{
+			if(comparaPos.pos->e == poro)
+				return true;
+			else
+				comparaPos = comparaPos.Siguiente();
+		}
+	}
+	return false;
 }
 
 int TListaPoro::Longitud() const{
@@ -184,6 +230,12 @@ ostream & operator<<(ostream &os, TListaPoro &lista) {
 	if(!lista.EsVacia())
 	{
 		os << lista.Obtener(aux);
+		while(!aux.Siguiente().EsVacia())
+		{
+			aux = aux.Siguiente();
+			os << " ";
+			os << lista.Obtener(aux);
+		}
 	}
 	os << ")";
 	return os;
