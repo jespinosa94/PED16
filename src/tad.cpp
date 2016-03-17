@@ -152,20 +152,48 @@ int main(){
 //		else
 //			cout << "P8- NOPE\n";
 //	}
+//	{
+//		/*
+//		 * Inserción en el centro de la lista
+//		 */
+//				TPoro p1;
+//				TPoro p2(1, 2, 3.2432423);
+//				TPoro p3(3, 4, -5.456, "rojo");
+//				TPoro p4(4, 5, 5, "VERDE");
+//				TListaPoro l1;
+//				l1.Insertar(p3);
+//				l1.Insertar(p4);
+//				l1.Insertar(p1);
+//				l1.Insertar(p2);
+//			stringstream p9;
+//			p9 << l1;
+//			string ep9 = "((3, 4) -5.46 rojo () (1, 2) 3.24 - (4, 5) 5.00 verde)";
+//			if(ep9.compare(p9.str())==0)
+//				cout << "P9- OK\n";
+//			else
+//				cout << "P9- NOPE\n";
+//
+//	}
 	{
 		/*
-		 * Inserción en el centro de la lista
+		 * Operaciones de borrado sobre listas
 		 */
-				TPoro p1;
-				TPoro p2(1, 2, 3.2432423);
-				TPoro p3(3, 4, -5.456, "rojo");
-				TPoro p4(4, 5, 5, "VERDE");
-				TListaPoro l1;
-				l1.Insertar(p3);
-				l1.Insertar(p4);
-				l1.Insertar(p1);
-				l1.Insertar(p2);
-				cout << l1;
+		TPoro p1;
+		TPoro p2(1, 2, 3.2432423);
+		TPoro p3(3, 4, -5.456, "rojo");
+		TPoro p4(4, 5, 5, "VERDE");
+		TListaPoro l1;
+		l1.Insertar(p3);
+		l1.Insertar(p4);
+		l1.Insertar(p1);
+		l1.Insertar(p2);
+		cout << l1 << endl;
+		l1.Borrar(p3);
+		cout << l1 << endl;
+		l1.Borrar(p2);
+		cout << l1 << endl;
+		l1.Borrar(p4);
+		cout << l1 << endl;
 	}
 }
 

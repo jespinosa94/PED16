@@ -95,10 +95,20 @@ TListaPoro::TListaPoro() {
 }
 
 TListaPoro::TListaPoro(const TListaPoro &poroLista) {
+
 }
 
 TListaPoro::~TListaPoro() {
-
+//	TListaPosicion p, q;
+//	q = Primera();
+//	while(!q.EsVacia())
+//	{
+//		p = q;
+//		q = q.Siguiente();
+////		delete p.pos;
+//	}
+//	primero = NULL;
+//	ultimo = NULL;
 }
 
 TListaPoro& TListaPoro::operator =(const TListaPoro&) {
@@ -126,6 +136,8 @@ void TListaPoro::InsertaCabeza(const TPoro &poro) {
 		aux->siguiente = NULL;
 		primero = aux;
 		ultimo = aux;
+//		primero->siguiente = ultimo;
+//		ultimo->anterior = primero;
 	}
 	else
 	{
@@ -147,7 +159,7 @@ TListaPosicion TListaPoro::ObtenerAnterior(const TPoro &poro) {
 	TListaPosicion aux = Primera();
 	while(!aux.Siguiente().EsVacia())
 	{
-		if(aux.pos->e == poro)
+		if(aux.pos->siguiente->e.Volumen() >= poro.Volumen())
 			return aux;
 		else
 			aux = aux.Siguiente();
@@ -157,6 +169,13 @@ TListaPosicion TListaPoro::ObtenerAnterior(const TPoro &poro) {
 
 void TListaPoro::InsertaCentro(const TPoro &poro) {
 	TListaPosicion poroAnterior = ObtenerAnterior(poro);
+	TListaNodo *newPoro = new TListaNodo;
+	newPoro->e = poro;
+	newPoro->siguiente = poroAnterior.pos->siguiente;
+	poroAnterior.Siguiente().pos->anterior = newPoro;
+	poroAnterior.pos->siguiente = newPoro;
+	newPoro->anterior = poroAnterior.pos;
+
 }
 
 bool TListaPoro::Insertar(const TPoro &poro) {
@@ -164,6 +183,9 @@ bool TListaPoro::Insertar(const TPoro &poro) {
 
 	if(EsVacia())
 	{
+		/*
+		 * Voy a suponer que ultimo y primero se enlazarán para que borrar funcione
+		 */
 		InsertaCabeza(poro);
 		return true;
 	}
@@ -180,10 +202,67 @@ bool TListaPoro::Insertar(const TPoro &poro) {
 	return false;
 }
 
-bool TListaPoro::Borrar(TPoro&) {
+TListaPosicion TListaPoro::ObtenerPosicion(TPoro &poro)
+{
+	TListaPosicion aux = Primera();
+	while(!aux.Siguiente().EsVacia())
+	{
+		if(aux.pos->e == poro)
+			return aux;
+		else
+			aux = aux.Siguiente();
+	}
+	return aux;
 }
 
-bool TListaPoro::Borrar(TListaPosicion&) {
+/*
+ * Se guarda en una posicion el primer nodo para despues de la asignación no perderlo y borrarlo
+ */
+void TListaPoro::BorrarCabeza(TListaPosicion &aux) {
+	primero = primero->siguiente;
+	aux.pos->~TListaNodo();
+	delete aux.pos;
+}
+
+void TListaPoro::BorrarCentro(TListaPosicion &borraPos) {
+	//La declaración de abajo es simplemente para simplificar que si a b c (queremos borrar b
+	//a sería anterior y c siguiente)
+	TListaNodo *anterior = borraPos.Anterior().pos;
+	TListaNodo *siguiente = borraPos.Siguiente().pos;
+	anterior->siguiente = siguiente;
+	siguiente->anterior = anterior;
+	borraPos.pos->~TListaNodo();
+	delete borraPos.pos;
+}
+
+void TListaPoro::BorrarCola(TListaPosicion &aux) {
+	ultimo = ultimo->anterior;
+	aux.pos->~TListaNodo();
+	delete aux.pos;
+}
+
+bool TListaPoro::Borrar(TPoro &poro) {
+	if(Buscar(poro))
+	{
+		TListaPosicion borraPos = ObtenerPosicion(poro);
+		Borrar(borraPos);
+		return true;
+	}
+	return false;
+}
+
+bool TListaPoro::Borrar(TListaPosicion &borraPos) {
+	if(Buscar(borraPos.pos->e))
+	{
+		if(borraPos.pos == primero)
+			BorrarCabeza(borraPos);
+		else if(borraPos.pos == ultimo)
+			BorrarCola(borraPos);
+		else
+			BorrarCentro(borraPos);
+		return true;
+	}
+	return false;
 }
 
 TPoro TListaPoro::Obtener(const TListaPosicion &obtenerPos) const {
@@ -191,17 +270,28 @@ TPoro TListaPoro::Obtener(const TListaPosicion &obtenerPos) const {
 }
 
 bool TListaPoro::Buscar(const TPoro &poro) {
-	if(!EsVacia())
+	TListaNodo *aux = primero;
+	while(aux)
 	{
-		TListaPosicion comparaPos = Primera();
-		while(!comparaPos.Siguiente().EsVacia())
-		{
-			if(comparaPos.pos->e == poro)
-				return true;
-			else
-				comparaPos = comparaPos.Siguiente();
-		}
+		if(aux->e == poro)
+			return true;
+		else
+			aux = aux->siguiente;
 	}
+//	if(!EsVacia())
+//	{
+//		TListaPosicion comparaPos = Primera();
+//		while(!comparaPos.Siguiente().EsVacia())
+//		{
+//			if(comparaPos.pos->e == poro)
+//				return true;
+//			else
+//			{
+//				comparaPos = comparaPos.Siguiente();
+//			}
+//
+//		}
+//	}
 	return false;
 }
 

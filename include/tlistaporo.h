@@ -67,6 +67,10 @@ private:
 	void InsertaCola(const TPoro &);
 	void InsertaCentro(const TPoro &);
 	TListaPosicion ObtenerAnterior(const TPoro &);
+	TListaPosicion ObtenerPosicion(TPoro &);
+	void BorrarCabeza(TListaPosicion &aux);
+	void BorrarCentro(TListaPosicion &);
+	void BorrarCola(TListaPosicion &aux);
 public:
 	// Constructor por defecto
 	TListaPoro();
