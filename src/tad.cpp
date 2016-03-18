@@ -250,7 +250,7 @@ int main(){
 		l1.Insertar(p3);
 		l1.Insertar(p2);
 		l1.Insertar(p5);
-		l2 = l1.ExtraerRango(1, 1);
+		l2 = l1.ExtraerRango(1, 3);
 		cout << l1 << endl << l2 << endl;
 	}
 }

@@ -366,10 +366,36 @@ TPoro TListaPoro::ObtenerPoro(int n)
 
 TListaPoro TListaPoro::ExtraerRango(int n1, int n2) {
 	TListaPoro nuevaLista;
+	TPoro aux;
+
 	if(n1>n2)
 		return nuevaLista;
 	else if(n1==n2)
-		nuevaLista.Insertar(ObtenerPoro(n1));
+	{
+		aux = ObtenerPoro(n1);
+		nuevaLista.Insertar(aux);
+	}
+	else
+	{
+		if(n1<=0)
+			n1 = 1;
+		if(n2>Longitud())
+			n2 = Longitud();
+		for(int i=n1; i<=n2; i++)
+		{
+			aux = ObtenerPoro(i);
+			nuevaLista.Insertar(aux);
+		}
+	}
+	/*
+	 * No me deja utilizar el operador - dentro de un módulo de la clase
+	 */
+	TListaPosicion posLista = nuevaLista.Primera();
+	while(!posLista.EsVacia())
+	{
+		(*this).Borrar(posLista.pos->e);
+		posLista = posLista.Siguiente();
+	}
 
 	return nuevaLista;
 }
