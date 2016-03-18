@@ -1,0 +1,33 @@
+No hace nada
+0
+0
+0
+1
+2
+3
+()
+SI
+NO
+((1, 1) 1.00 - (2, 2) 2.00 - (3, 3) 3.00 -)
+((1, 2) 3.00 rojo)
+((1, 2) 3.00 rojo)
+Longitud: 0
+Longitud: 1
+Longitud: 1
+Longitud: 0
+Longitud: 0
+Longitud: 0
+Longitud: 1
+Longitud: 1
+((1, 1) 1.00 rojo (2, 2) 2.00 verde)
+((2, 2) 2.00 verde)
+()
+SI
+SI
+NO
+(1, 1) 1.00 rojo
+(2, 2) 2.00 verde
+(3, 3) 3.00 amarillo
+(3, 3) 3.00 amarillo
+(2, 2) 2.00 verde
+(1, 1) 1.00 rojo

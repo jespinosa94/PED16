@@ -58,14 +58,18 @@ TPoro& TPoro::operator =(const TPoro &p) {
  */
 bool TPoro::operator ==(const TPoro &p) const {
 	bool temp = false;
-	if(color==NULL && p.color==NULL && x==p.x && y==p.y && volumen==p.volumen)
+	if((*this).EsVacio() && p.EsVacio())
 		temp = true;
-	else if(color!=NULL && p.color!=NULL && x==p.x && y==p.y && volumen==p.volumen)
+	else if(!(*this).EsVacio() && !p.EsVacio())
 	{
-		if(!strcmp(color, p.color))
+		if(color==NULL && p.color==NULL && x==p.x && y==p.y && volumen==p.volumen)
 			temp = true;
+		else if(color!=NULL && p.color!=NULL && x==p.x && y==p.y && volumen==p.volumen)
+		{
+			if(!strcmp(color, p.color))
+				temp = true;
+		}
 	}
-
 	return temp;
 }
 

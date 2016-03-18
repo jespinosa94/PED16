@@ -133,14 +133,20 @@ TListaPoro& TListaPoro::operator =(const TListaPoro &poroLista) {
 bool TListaPoro::operator ==(const TListaPoro &poroLista) const{
 	TListaPosicion estaLista = Primera();
 	TListaPosicion listaP = poroLista.Primera();
-	while(!estaLista.EsVacia())
+	if(EsVacia() && poroLista.EsVacia())
+		return true;
+	else if(!EsVacia() && !poroLista.EsVacia())
 	{
-		if(estaLista.pos->e != listaP.pos->e)
-			return false;
-		estaLista = estaLista.Siguiente();
-		listaP = listaP.Siguiente();
+		while(!estaLista.EsVacia())
+		{
+			if(estaLista.pos->e != listaP.pos->e)
+				return false;
+			estaLista = estaLista.Siguiente();
+			listaP = listaP.Siguiente();
+		}
+		return true;
 	}
-	return true;
+	return false;
 }
 
 TListaPoro TListaPoro::operator +(TListaPoro &poroLista) {
