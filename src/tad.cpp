@@ -174,26 +174,84 @@ int main(){
 //				cout << "P9- NOPE\n";
 //
 //	}
+//	{
+//		/*
+//		 * Operaciones de borrado sobre listas
+//		 */
+//		TPoro p1;
+//		TPoro p2(1, 2, 3.2432423);
+//		TPoro p3(3, 4, -5.456, "rojo");
+//		TPoro p4(4, 5, 5, "VERDE");
+//		TListaPoro l1;
+//		l1.Insertar(p3);
+//		l1.Insertar(p4);
+//		l1.Insertar(p1);
+//		l1.Insertar(p2);
+//		cout << l1 << endl;
+//		l1.Borrar(p3);
+//		cout << l1 << endl;
+//		l1.Borrar(p2);
+//		cout << l1 << endl;
+//		l1.Borrar(p4);
+//		cout << l1 << endl;
+//		l1.Borrar(p1);
+//		cout << l1 << endl;
+//	}
+//	{
+//		/*
+//		 * Prueba del constructor de copia y la sobrecarga del operador =
+//		 */
+//		TPoro p1;
+//		TPoro p2(1, 2, 3.2432423);
+//		TPoro p3(3, 4, -5.456, "rojo");
+//		TPoro p4(4, 5, 5, "VERDE");
+//		TPoro p5(1, 1, -5.456, "amariLLo");
+//		TListaPoro l1, l3;
+//		l1.Insertar(p3);
+//		l1.Insertar(p4);
+//		l1.Insertar(p1);
+//		l1.Insertar(p2);
+//		l1.Insertar(p5);
+//		cout << l1 << endl;
+//
+//		TListaPoro l2(l1);
+//		cout << l1 << endl << l2 << endl;
+//
+//		l3 = l1;
+//		cout << l3 << endl;
+//	}
+//	{
+//		/*
+//		 * Prueba de los operadores + y -
+//		 */
+//				TPoro p1;
+//				TPoro p2(1, 2, 3.2432423);
+//				TPoro p3(3, 4, -5.456, "rojo");
+//				TPoro p4(4, 5, 5, "VERDE");
+//				TPoro p5(1, 1, -5.456, "amariLLo");
+//				TListaPoro l1, l2, l3;
+//				l1.Insertar(p3);
+//				l1.Insertar(p4);
+//				l3.Insertar(p3);
+//				l3.Insertar(p2);
+//				l3.Insertar(p5);
+//		l2 = l1 - l3;
+//		cout << l1 << endl << l3 << endl << l2 << endl;
+//	}
 	{
-		/*
-		 * Operaciones de borrado sobre listas
-		 */
 		TPoro p1;
 		TPoro p2(1, 2, 3.2432423);
 		TPoro p3(3, 4, -5.456, "rojo");
 		TPoro p4(4, 5, 5, "VERDE");
-		TListaPoro l1;
+		TPoro p5(1, 1, -5.456, "amariLLo");
+		TListaPoro l1, l2;
 		l1.Insertar(p3);
 		l1.Insertar(p4);
-		l1.Insertar(p1);
+		l1.Insertar(p3);
 		l1.Insertar(p2);
-		cout << l1 << endl;
-		l1.Borrar(p3);
-		cout << l1 << endl;
-		l1.Borrar(p2);
-		cout << l1 << endl;
-		l1.Borrar(p4);
-		cout << l1 << endl;
+		l1.Insertar(p5);
+		l2 = l1.ExtraerRango(1, 1);
+		cout << l1 << endl << l2 << endl;
 	}
 }
 

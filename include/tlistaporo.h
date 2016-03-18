@@ -56,7 +56,7 @@ public:
 };
 class TListaPoro {
 	// Sobrecarga del operador salida
-	friend ostream & operator<<(ostream &, TListaPoro &);
+	friend ostream & operator<<(ostream &, const TListaPoro &);
 private:
 	// Primer elemento de la lista
 	TListaNodo *primero;
@@ -71,6 +71,8 @@ private:
 	void BorrarCabeza(TListaPosicion &aux);
 	void BorrarCentro(TListaPosicion &);
 	void BorrarCola(TListaPosicion &aux);
+	void Copia(const TListaPoro &);
+	TPoro ObtenerPoro(int n);
 public:
 	// Constructor por defecto
 	TListaPoro();
@@ -102,9 +104,9 @@ public:
 	// Devuelve la longitud de la lista
 	int Longitud() const;
 	// Devuelve la primera posición en la lista
-	TListaPosicion Primera();
+	TListaPosicion Primera() const;
 	// Devuelve la última posición en la lista
-	TListaPosicion Ultima();
+	TListaPosicion Ultima() const;
 	// Extraer un rango de nodos de la lista
 	TListaPoro ExtraerRango (int n1, int n2);
 };
