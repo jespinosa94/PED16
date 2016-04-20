@@ -9,7 +9,9 @@ class TNodoABB;
 
 #ifndef INCLUDE_TABBPORO_H_
 #define INCLUDE_TABBPORO_H_
+
 class TABBPoro {
+	friend ostream & operator<<(ostream &, TABBPoro &);
 private:
 	// Puntero al nodo
 	TNodoABB *nodo;
@@ -19,6 +21,10 @@ private:
 	void PreordenAux(TVectorPoro &, int &);
 	// AUXILIAR : Devuelve el recorrido en postorden
 	void PostordenAux(TVectorPoro &, int &);
+	//Comprueba que no haya nodos con el mismo volument en el arbol
+	bool FiltraVolumen(int);
+	//Busca e inserta un nodo en un árbol
+	void BuscaInserta(TNodoABB &);
 public:
 	// Constructor por defecto
 	TABBPoro();
@@ -27,14 +33,14 @@ public:
 	// Destructor
 	~TABBPoro();
 	// Sobrecarga del operador asignación
-	TABBPoro & operator=(TABBPoro &);
+	TABBPoro & operator=(const TABBPoro &);
 
 	// Sobrecarga del operador igualdad
 	bool operator==(TABBPoro &);
 	// Devuelve TRUE si el árbol está vacío, FALSE en caso contrario
-	bool EsVacio();
+	bool EsVacio() const;
 	// Inserta el elemento en el árbol
-	bool Insertar(TPoro &);
+	bool Insertar(const TPoro &);
 	// Borra el elemento en el árbol
 	bool Borrar(TPoro &);
 	// Devuelve TRUE si el elemento está en el árbol, FALSE en caso contrario
@@ -62,15 +68,16 @@ public:
 	TABBPoro operator-( TABBPoro
 	&);
 	// Sobrecarga del operador salida
-	friend ostream & operator<<(ostream &, TABBPoro &);
 };
 
 class TNodoABB {
+	friend class TABBPoro;
 private:
 	// El elemento del nodo
 	TPoro item;
 	// Subárbol izquierdo y derecho
 	TABBPoro iz, de;
+	void Copia(const TNodoABB &);
 public:
 	// Constructor por defecto
 	TNodoABB ();
@@ -79,6 +86,6 @@ public:
 	// Destructor
 	~ TNodoABB ();
 	// Sobrecarga del operador asignación
-	TNodoABB & operator=( TNodoABB &);
+	TNodoABB & operator=(const TNodoABB &);
 };
 #endif /* INCLUDE_TABBPORO_H_ */
