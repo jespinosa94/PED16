@@ -22,9 +22,13 @@ private:
 	// AUXILIAR : Devuelve el recorrido en postorden
 	void PostordenAux(TVectorPoro &, int &);
 	//Comprueba que no haya nodos con el mismo volument en el arbol
-	bool FiltraVolumen(int);
+	bool FiltraVolumen(const int &);
 	//Busca e inserta un nodo en un árbol
-	void BuscaInserta(TNodoABB &);
+	void BuscaInserta(TNodoABB *);
+	//Auxiliar para calcular el numero de nodos
+	int NodosAux(int );
+	//Auxiliar para buscar un poro en el árbol
+	bool BuscarAux(const TPoro &);
 public:
 	// Constructor por defecto
 	TABBPoro();
@@ -44,7 +48,7 @@ public:
 	// Borra el elemento en el árbol
 	bool Borrar(TPoro &);
 	// Devuelve TRUE si el elemento está en el árbol, FALSE en caso contrario
-	bool Buscar(TPoro &);
+	bool Buscar(const TPoro &);
 	// Devuelve el elemento en la raíz del árbol
 	TPoro Raiz();
 	// Devuelve la altura del árbol (la altura de un árbol vacío es 0)

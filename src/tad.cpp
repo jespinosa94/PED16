@@ -20,15 +20,72 @@ int main(){
 		TABBPoro a;
 		TPoro p1(20, 20, 20);
 		TPoro p2(10, 10, 10);
+		TPoro p3(30, 30, 30);
+		TPoro p4(40, 40, 40);
+		TPoro p5(5, 5, 5);
+		TPoro p6(15, 15, 15);
+		TPoro p7(50, 50, 50);
+		TPoro p8(22, 22, 22);
+		TPoro p9(25, 25, 25);
+		TPoro p10(24, 24, 24);
+		TPoro p11(26, 26, 26);
+		TPoro p12(3, 3, 3);
+		TPoro p13(35, 35, 35);
+		TPoro p14(38, 38, 38);
+		TPoro p15(39, 39, 39);
+		TPoro p16(37, 37, 37);
+
+		TPoro p17(9, 9, 9);
 
 		if(a.EsVacio())
 			cout << "P1- OK\n";
 		else cout << "P1- NOPE\n";
+		if(!a.Buscar(p5) && !a.Buscar(p1) && !a.Buscar(p9) && !a.Buscar(p17))
+			cout << "P2- OK\n";
+		else
+			cout << "P2- NOPE\n";
 
 		a.Insertar(p1);
 		a.Insertar(p2);
-		cout << "debug pause\n";
+		a.Insertar(p3);
+		a.Insertar(p4);
+		a.Insertar(p5);
+		a.Insertar(p6);
+		a.Insertar(p7);
+		a.Insertar(p8);
+		a.Insertar(p9);
+		a.Insertar(p10);
+		a.Insertar(p11);
+		a.Insertar(p12);
+		a.Insertar(p13);
+		a.Insertar(p14);
+		a.Insertar(p15);
+		a.Insertar(p16);
 
+
+
+		if(a.Buscar(p5) && a.Buscar(p1) && a.Buscar(p9) && !a.Buscar(p17))
+			cout << "P3- OK\n";
+		else
+			cout << "P3- NOPE\n";
+
+		stringstream buffer;
+		buffer << a.Nodos();
+		string esperado = "16";
+		if(esperado.compare(buffer.str()) ==0)
+			cout << "P4- OK\n";
+		else
+			cout << "P4- NOPE\n";
+
+		//Limpia el contenido del buffer
+		buffer.str( std::string() );
+		buffer.clear();
+
+		if(!a.Insertar(p7) && !a.Insertar(p1) && !a.Insertar(p16) && a.Insertar(p17))
+			cout << "P5- OK\n";
+		else
+			cout << "P5- NOPE\n";
+		cout << "holis";
 	}
 }
 //	{

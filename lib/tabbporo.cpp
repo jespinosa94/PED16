@@ -7,7 +7,7 @@
 
 #include "../include/tabbporo.h"
 
-TNodoABB::TNodoABB():iz(), de() {}
+TNodoABB::TNodoABB():iz(), de(), item() {}
 
 TNodoABB::TNodoABB(TNodoABB &origen){
 	Copia(origen);
@@ -34,7 +34,8 @@ TNodoABB& TNodoABB::operator =(const TNodoABB &origen) {
 /*
  * ****************************************************************************
  */
-void TABBPoro::InordenAux(TVectorPoro&, int&) {
+void TABBPoro::InordenAux(TVectorPoro &vector, int &posicion) {
+
 }
 
 void TABBPoro::PreordenAux(TVectorPoro&, int&) {
@@ -63,39 +64,87 @@ bool TABBPoro::EsVacio() const{
 	return nodo == NULL;
 }
 
-bool TABBPoro::FiltraVolumen(int volumen) {
-	return true;
+bool TABBPoro::FiltraVolumen(const int &volumen) {
+	if(nodo->item.Volumen() == volumen)
+		return false;
+	else if(volumen < nodo->item.Volumen() && !nodo->iz.EsVacio())
+		nodo->iz.FiltraVolumen(volumen);
+	else if(volumen > nodo->item.Volumen() && !nodo->de.EsVacio())
+		nodo->de.FiltraVolumen(volumen);
+	else
+		return true;
 }
 
-void TABBPoro::BuscaInserta(TNodoABB &nuevo){
+void TABBPoro::BuscaInserta(TNodoABB *nuevo){
 	//Comprobar recursivamente que sea menor o mayor que el elemento nodo de la raiz e introducir donde quepa
-	if(nuevo.item.Volumen() < nodo->item.Volumen())
+	if(nuevo->item.Volumen() < nodo->item.Volumen())
 	{
-
+		//recursión hacia la izquierda del árbol
+		if(!nodo->iz.EsVacio())
+			nodo->iz.BuscaInserta(nuevo);
+		else
+			nodo->iz.nodo = nuevo;
+	}
+	else if(nuevo->item.Volumen() > nodo->item.Volumen())
+	{
+		//recursión hacia la derecha del árbol
+		if(!nodo->de.EsVacio())
+			nodo->de.BuscaInserta(nuevo);
+		else
+			nodo->de.nodo = nuevo;
 	}
 }
 
 bool TABBPoro::Insertar(const TPoro &poro) {
-	if(FiltraVolumen(poro.Volumen()))
+	//se crea el nodo a insertar
+	TNodoABB *aux = new TNodoABB;;
+	aux->item = poro;
+	if(EsVacio())
 	{
-		//se crea el nodo a insertar
-		TNodoABB *aux = new TNodoABB();
-		aux->item = poro;
-		//se busca e inserta el nodo
-		if(EsVacio())
-			nodo = aux;
-		else
-			BuscaInserta(*aux);
-
+		nodo = aux;
 		return true;
 	}
+	else if(FiltraVolumen(poro.Volumen()))
+	{
+		BuscaInserta(aux);
+		return true;
+	}
+//	if(FiltraVolumen(poro.Volumen()))
+//	{
+//		//se crea el nodo a insertar
+//		TNodoABB *aux = new TNodoABB;;
+//		aux->item = poro;
+//		//se busca e inserta el nodo
+//		if(EsVacio())
+//			nodo = aux;
+//		else
+//			BuscaInserta(aux);
+//
+//		return true;
+//	}
 	return false;
 }
 
 bool TABBPoro::Borrar(TPoro&) {
 }
 
-bool TABBPoro::Buscar(TPoro&) {
+bool TABBPoro::Buscar(const TPoro &poro) {
+	if(EsVacio())
+		return false;
+	else
+		return BuscarAux(poro);
+}
+
+bool TABBPoro::BuscarAux(const TPoro &poro)
+{
+	if(nodo->item == poro)
+		return true;
+	else if(poro.Volumen() < nodo->item.Volumen() && !nodo->iz.EsVacio())
+		nodo->iz.Buscar(poro);
+	else if(poro.Volumen() > nodo->item.Volumen() && !nodo->de.EsVacio())
+		nodo->de.Buscar(poro);
+	else
+		return false;
 }
 
 TPoro TABBPoro::Raiz() {
@@ -105,6 +154,15 @@ int TABBPoro::Altura() {
 }
 
 int TABBPoro::Nodos() {
+	return NodosAux(0);
+}
+int TABBPoro::NodosAux(int total)
+{
+	if(!EsVacio())
+	{
+		total = 1 + nodo->iz.NodosAux(total) + nodo->de.NodosAux(total);
+	}
+	return total;
 }
 
 int TABBPoro::NodosHoja() {
