@@ -83,7 +83,7 @@ void TABBPoro::NivelesAux(TVectorPoro &vector, int &posicion)
 	}
 }
 
-TABBPoro::TABBPoro() {
+TABBPoro::TABBPoro(): error() {
 	nodo = NULL;
 }
 
@@ -141,6 +141,9 @@ bool TABBPoro::operator ==(const TABBPoro &otroArbol) {
 
 bool TABBPoro::EsVacio() const{
 	return nodo == NULL;
+}
+bool TABBPoro::EsHoja() const{
+	return (nodo->de.EsVacio() && nodo->iz.EsVacio());
 }
 
 bool TABBPoro::FiltraVolumen(const int &volumen) {
@@ -204,7 +207,75 @@ bool TABBPoro::Insertar(const TPoro &poro) {
 	return false;
 }
 
-bool TABBPoro::Borrar(TPoro&) {
+bool TABBPoro::Borrar(TPoro &poro) {
+	if(!EsVacio())
+	{
+		if(Buscar(poro))
+		{
+			if(nodo->item == poro && EsHoja())
+			{
+				(*this).~TABBPoro();
+				return true;
+			}
+			else if(nodo->item == poro && !EsHoja())
+			{
+				/*
+				 * A partir del nodo donde se encuentra el item se busca el mayor de la izquierda,
+				 * se sustituyen los valores del nodo hoja y del nodo a borrar
+				 * y se llama a la recursión para borrar el item que ahora será un nodo hoja
+				 * Entremedias hay que borrar el poro hoja que seguirá teniendo el mismo resultado
+				 * Ver si la idea de los punteros funciona, sino cambiarlo a referencias normales loki
+				 */
+				TNodoABB aux;
+				aux = BuscaMayorIzq((*this));
+				Borrar(aux.item);
+				TPoro poroApoyo = aux.item;
+				aux.item = nodo->item;
+				nodo->item = poroApoyo;
+
+				Borrar(poro);
+			}
+			else if(poro.Volumen() < nodo->item.Volumen() && !nodo->iz.EsVacio())
+				nodo->iz.Borrar(poro);
+			else if(poro.Volumen() > nodo->item.Volumen() && !nodo->de.EsVacio())
+				nodo->de.Borrar(poro);
+		}
+		else
+			return false;
+	}
+	else return false;
+}
+TNodoABB TABBPoro::BuscaMayorIzq(const TABBPoro &arbol)
+{
+	/*
+	 * BuscaMayor puede devolver un *nodo, pero siempre será un nodo normal en otras funciones
+	 * Si es una raiz o nodo hoja los devuelve sin mas, el problema es cuando el nodo borrado no tiene hijos izquierdos,
+	 * entonces hay que buscar el MayorIzq del hijo derecho, que puede ser recursivo a la derecha y al final devolver un nodo hoja si
+	 * es una lista ordenada del modo 1->3->5->7 y borrar el 3
+	 * PD: vaya rallada
+	 */
+	TNodoABB *aux = arbol.nodo;
+	if(!arbol.nodo->iz.EsVacio())
+	{
+		aux = arbol.nodo->iz.nodo;
+		while(!aux->de.EsVacio())
+		{
+			aux = aux->de.nodo;
+		}
+		return *aux;
+	}
+	else if(!arbol.nodo->de.EsVacio())
+	{
+		/*
+		 * BuscaMayor devuelve un nodo normal y por eso se puede hacer de esta manera
+		 */
+		TNodoABB aux2;
+		aux2 = BuscaMayorIzq(arbol.nodo->de);
+		return aux2;
+	}
+	else
+		return *aux;
+
 }
 
 bool TABBPoro::Buscar(const TPoro &poro) {
@@ -227,9 +298,21 @@ bool TABBPoro::BuscarAux(const TPoro &poro)
 }
 
 TPoro TABBPoro::Raiz() {
+	if(!EsVacio())
+		return nodo->item;
+	else
+		return error;
 }
 
 int TABBPoro::Altura() {
+	int a1, a2;
+	if(!EsVacio())
+	{
+		a1 = nodo->iz.Altura();
+		a2 = nodo->de.Altura();
+		return (1 + (a1<a2 ? a2:a1));
+	}
+	else return 0;
 }
 
 int TABBPoro::Nodos() {
@@ -245,6 +328,14 @@ int TABBPoro::NodosAux(int total)
 }
 
 int TABBPoro::NodosHoja() {
+	int a1=0;
+	if(!EsVacio())
+	{
+		a1 = a1 + nodo->iz.NodosHoja() + nodo->de.NodosHoja();
+		if(EsHoja())
+			a1++;
+	}
+	return a1;
 }
 
 TVectorPoro TABBPoro::Inorden() {
@@ -291,4 +382,10 @@ TABBPoro TABBPoro::operator +(TABBPoro&) {
 }
 
 TABBPoro TABBPoro::operator -(TABBPoro&) {
+}
+
+ostream & operator<<(ostream &os, TABBPoro &arbol)
+{
+	os << arbol.Niveles();
+	return os;
 }

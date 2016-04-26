@@ -15,6 +15,7 @@ class TABBPoro {
 private:
 	// Puntero al nodo
 	TNodoABB *nodo;
+	TPoro error;
 	// AUXILIAR : Devuelve el recorrido en inorden
 	void InordenAux(TVectorPoro &, int &);
 	// AUXILIAR : Devuelve el recorrido en preorden
@@ -34,6 +35,10 @@ private:
 	void Copiar(const TABBPoro &);
 	//Auxiliar para comprobar si dos árboles son iguales
 	bool CompruebaNodos(const TABBPoro &, const TABBPoro &);
+	//Comprueba si un nodo es un nodo hoja
+	bool EsHoja() const;
+	//Busca el mayor nodo hijo de la izquierda
+	TNodoABB BuscaMayorIzq(const TABBPoro &);
 public:
 	// Constructor por defecto
 	TABBPoro();
