@@ -21,6 +21,7 @@ private:
 	void PreordenAux(TVectorPoro &, int &);
 	// AUXILIAR : Devuelve el recorrido en postorden
 	void PostordenAux(TVectorPoro &, int &);
+	void NivelesAux(TVectorPoro &, int &);
 	//Comprueba que no haya nodos con el mismo volument en el arbol
 	bool FiltraVolumen(const int &);
 	//Busca e inserta un nodo en un árbol
@@ -29,6 +30,10 @@ private:
 	int NodosAux(int );
 	//Auxiliar para buscar un poro en el árbol
 	bool BuscarAux(const TPoro &);
+	//Auxiliar para copiar el árbol
+	void Copiar(const TABBPoro &);
+	//Auxiliar para comprobar si dos árboles son iguales
+	bool CompruebaNodos(const TABBPoro &, const TABBPoro &);
 public:
 	// Constructor por defecto
 	TABBPoro();
@@ -40,7 +45,7 @@ public:
 	TABBPoro & operator=(const TABBPoro &);
 
 	// Sobrecarga del operador igualdad
-	bool operator==(TABBPoro &);
+	bool operator==(const TABBPoro &);
 	// Devuelve TRUE si el árbol está vacío, FALSE en caso contrario
 	bool EsVacio() const;
 	// Inserta el elemento en el árbol

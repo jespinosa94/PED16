@@ -85,7 +85,90 @@ int main(){
 			cout << "P5- OK\n";
 		else
 			cout << "P5- NOPE\n";
-		cout << "holis";
+		buffer << a.Inorden();
+		esperado = "[1 (3, 3) 3.00 - 2 (5, 5) 5.00 - 3 (9, 9) 9.00 - 4 (10, 10) 10.00 - 5 (15, 15) 15.00 - 6 (20, 20) 20.00 - 7 (22, 22) 22.00 - 8 (24, 24) 24.00 - 9 (25, 25) 25.00 - 10 (26, 26) 26.00 - 11 (30, 30) 30.00 - 12 (35, 35) 35.00 - 13 (37, 37) 37.00 - 14 (38, 38) 38.00 - 15 (39, 39) 39.00 - 16 (40, 40) 40.00 - 17 (50, 50) 50.00 -]";
+		if(esperado.compare(buffer.str())==0)
+			cout << "P5- OK\n";
+		else
+			cout << "P5- NOPE \n";
+		//Limpia el contenido del buffer
+		buffer.str( std::string() );
+		buffer.clear();
+
+		buffer << a.Preorden();
+		esperado = "[1 (20, 20) 20.00 - 2 (10, 10) 10.00 - 3 (5, 5) 5.00 - 4 (3, 3) 3.00 - 5 (9, 9) 9.00 - 6 (15, 15) 15.00 - 7 (30, 30) 30.00 - 8 (22, 22) 22.00 - 9 (25, 25) 25.00 - 10 (24, 24) 24.00 - 11 (26, 26) 26.00 - 12 (40, 40) 40.00 - 13 (35, 35) 35.00 - 14 (38, 38) 38.00 - 15 (37, 37) 37.00 - 16 (39, 39) 39.00 - 17 (50, 50) 50.00 -]";
+		if(esperado.compare(buffer.str())==0)
+			cout << "P6- OK\n";
+		else
+			cout << "P6- NOPE\n";
+		//Limpia el contenido del buffer
+		buffer.str( std::string() );
+		buffer.clear();
+
+		buffer << a.Postorden();
+		esperado = "[1 (3, 3) 3.00 - 2 (9, 9) 9.00 - 3 (5, 5) 5.00 - 4 (15, 15) 15.00 - 5 (10, 10) 10.00 - 6 (24, 24) 24.00 - 7 (26, 26) 26.00 - 8 (25, 25) 25.00 - 9 (22, 22) 22.00 - 10 (37, 37) 37.00 - 11 (39, 39) 39.00 - 12 (38, 38) 38.00 - 13 (35, 35) 35.00 - 14 (50, 50) 50.00 - 15 (40, 40) 40.00 - 16 (30, 30) 30.00 - 17 (20, 20) 20.00 -]";
+		if(esperado.compare(buffer.str())==0)
+			cout << "P7- OK\n";
+		else
+			cout << "P7- NOPE\n";
+		//Limpia el contenido del buffer
+		buffer.str( std::string() );
+		buffer.clear();
+
+		TABBPoro b;
+		b.Insertar(p1);
+		b.Insertar(p2);
+
+		if(a == b)
+			cout << "P8- NOPE\n";
+		else cout << "P8- OK\n";
+
+		b.~TABBPoro();
+		if(b.EsVacio())
+			cout << "P9- OK\n";
+		else
+			cout << "P9- NOPE\n";
+
+
+		TABBPoro c(a);
+		b = c;
+		if(a == b)
+			cout << "P10- OK\n";
+		else cout << "P10- NOPE\n";
+
+		//SE INTERCAMBIA EL ORDEN DE LOS DOS ULTIMOS ELEMENTOS PARA COMPARAR
+		a.~TABBPoro();
+		a.Insertar(p1);
+		a.Insertar(p2);
+		a.Insertar(p3);
+		a.Insertar(p4);
+		a.Insertar(p5);
+		a.Insertar(p6);
+		a.Insertar(p7);
+		a.Insertar(p8);
+		a.Insertar(p9);
+		a.Insertar(p10);
+		a.Insertar(p11);
+		a.Insertar(p12);
+		a.Insertar(p13);
+		a.Insertar(p14);
+		a.Insertar(p16);
+		a.Insertar(p15);
+		if(a==c)
+			cout << "P11- NOPE\n";
+		else
+			cout << "P11- OK\n";
+
+		buffer << c.Niveles();
+		esperado = "[1 (20, 20) 20.00 - 2 (10, 10) 10.00 - 3 (30, 30) 30.00 - 4 (5, 5) 5.00 - 5 (15, 15) 15.00 - 6 (22, 22) 22.00 - 7 (40, 40) 40.00 - 8 (3, 3) 3.00 - 9 (9, 9) 9.00 - 10 (25, 25) 25.00 - 11 (35, 35) 35.00 - 12 (50, 50) 50.00 - 13 (24, 24) 24.00 - 14 (26, 26) 26.00 - 15 (38, 38) 38.00 - 16 (37, 37) 37.00 - 17 (39, 39) 39.00 -]";
+		if(esperado.compare(buffer.str())==0)
+			cout << "P12- OK\n";
+		else
+			cout << "P12- NOPE\n";
+		//Limpia el contenido del buffer
+		buffer.str( std::string() );
+		buffer.clear();
+
 	}
 }
 //	{
