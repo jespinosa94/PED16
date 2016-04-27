@@ -28,7 +28,7 @@ private:
 	//Busca e inserta un nodo en un árbol
 	void BuscaInserta(TNodoABB *);
 	//Auxiliar para calcular el numero de nodos
-	int NodosAux(int );
+	int NodosAux(int ) const;
 	//Auxiliar para buscar un poro en el árbol
 	bool BuscarAux(const TPoro &);
 	//Auxiliar para copiar el árbol
@@ -64,7 +64,7 @@ public:
 	// Devuelve la altura del árbol (la altura de un árbol vacío es 0)
 	int Altura();
 	// Devuelve el número de nodos del árbol (un árbol vacío posee 0 nodos)
-	int Nodos();
+	int Nodos() const;
 	// Devuelve el número de nodos hoja en el árbol (la raíz puede ser nodo hoja)
 	int NodosHoja();
 	// Devuelve el recorrido en inorden

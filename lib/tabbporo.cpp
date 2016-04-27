@@ -123,16 +123,27 @@ TABBPoro& TABBPoro::operator =(const TABBPoro &origen) {
 
 bool TABBPoro::CompruebaNodos(const TABBPoro &esteArbol, const TABBPoro &otroArbol)
 {
-	if(esteArbol.EsVacio() && otroArbol.EsVacio())
-		return true;
-	else if(!esteArbol.EsVacio() && !otroArbol.EsVacio())
+	if(esteArbol.Nodos() == otroArbol.Nodos())
 	{
-		if(esteArbol.nodo->item == otroArbol.nodo->item && CompruebaNodos(esteArbol.nodo->iz, otroArbol.nodo->iz) &&
-				CompruebaNodos(esteArbol.nodo->de, otroArbol.nodo->de))
+		if(!esteArbol.EsVacio() && !otroArbol.EsVacio())
+		{
+			//Se comprueba recursivamente el buscar() de cada elemento
+		}
+		else if(esteArbol.EsVacio() && otroArbol.EsVacio())
 			return true;
 	}
 	else
 		return false;
+//	if(esteArbol.EsVacio() && otroArbol.EsVacio())
+//		return true;
+//	else if(!esteArbol.EsVacio() && !otroArbol.EsVacio())
+//	{
+//		if(esteArbol.nodo->item == otroArbol.nodo->item && CompruebaNodos(esteArbol.nodo->iz, otroArbol.nodo->iz) &&
+//				CompruebaNodos(esteArbol.nodo->de, otroArbol.nodo->de))
+//			return true;
+//	}
+//	else
+//		return false;
 }
 
 bool TABBPoro::operator ==(const TABBPoro &otroArbol) {
@@ -315,10 +326,10 @@ int TABBPoro::Altura() {
 	else return 0;
 }
 
-int TABBPoro::Nodos() {
+int TABBPoro::Nodos() const {
 	return NodosAux(0);
 }
-int TABBPoro::NodosAux(int total)
+int TABBPoro::NodosAux(int total) const
 {
 	if(!EsVacio())
 	{
