@@ -30,11 +30,11 @@ private:
 	//Auxiliar para calcular el numero de nodos
 	int NodosAux(int ) const;
 	//Auxiliar para buscar un poro en el árbol
-	bool BuscarAux(const TPoro &);
+	bool BuscarAux(const TPoro &) const;
 	//Auxiliar para copiar el árbol
 	void Copiar(const TABBPoro &);
 	//Auxiliar para comprobar si dos árboles son iguales
-	bool CompruebaNodos(const TABBPoro &, const TABBPoro &);
+	bool CompruebaNodos(const TABBPoro &);
 	//Comprueba si un nodo es un nodo hoja
 	bool EsHoja() const;
 	//Busca el mayor nodo hijo de la izquierda
@@ -58,7 +58,7 @@ public:
 	// Borra el elemento en el árbol
 	bool Borrar(TPoro &);
 	// Devuelve TRUE si el elemento está en el árbol, FALSE en caso contrario
-	bool Buscar(const TPoro &);
+	bool Buscar(const TPoro &) const;
 	// Devuelve el elemento en la raíz del árbol
 	TPoro Raiz();
 	// Devuelve la altura del árbol (la altura de un árbol vacío es 0)
