@@ -401,10 +401,23 @@ TVectorPoro TABBPoro::Niveles() {
 	return recorrido;
 }
 
-TABBPoro TABBPoro::operator +(TABBPoro&) {
+TABBPoro TABBPoro::operator +(TABBPoro &arbol) {
+	TABBPoro aux((*this));
+	TVectorPoro vectorArbol(arbol.Inorden());
+	for(int i=0; i<vectorArbol.Longitud(); i++)
+		aux.Insertar(vectorArbol[i]);
+	return aux;
 }
 
-TABBPoro TABBPoro::operator -(TABBPoro&) {
+TABBPoro TABBPoro::operator -(TABBPoro &arbol) {
+	TVectorPoro vectorThis = Inorden();
+	TABBPoro aux;
+	for (int i=0; i<vectorThis.Longitud(); i++)
+	{
+		if(!arbol.Buscar(vectorThis[i]))
+			aux.Insertar(vectorThis[i]);
+	}
+	return aux;
 }
 
 ostream & operator<<(ostream &os, TABBPoro &arbol)
