@@ -121,19 +121,25 @@ TABBPoro& TABBPoro::operator =(const TABBPoro &origen) {
 	return *this;
 }
 
-bool TABBPoro::CompruebaNodos(const TABBPoro &esteArbol, const TABBPoro &otroArbol)
+bool TABBPoro::CompruebaNodos(const TABBPoro &otroArbol)
 {
-	if(esteArbol.Nodos() == otroArbol.Nodos())
-	{
-		if(!esteArbol.EsVacio() && !otroArbol.EsVacio())
-		{
-			//Se comprueba recursivamente el buscar() de cada elemento
-		}
-		else if(esteArbol.EsVacio() && otroArbol.EsVacio())
-			return true;
-	}
+	if(EsVacio())
+		return true;
 	else
-		return false;
+	{
+		return (otroArbol.Buscar(nodo->item) && nodo->iz.CompruebaNodos(otroArbol) && nodo->de.CompruebaNodos(otroArbol));
+	}
+//	if(esteArbol.Nodos() == otroArbol.Nodos())
+//	{
+//		if(esteArbol.EsVacio())
+//			return true;
+//		else
+//		{
+//			return (otroArbol.Buscar(esteArbol.nodo->item) && esteArbol.CompruebaNodos()
+//		}
+//	}
+//	else
+//		return false;
 //	if(esteArbol.EsVacio() && otroArbol.EsVacio())
 //		return true;
 //	else if(!esteArbol.EsVacio() && !otroArbol.EsVacio())
@@ -147,7 +153,11 @@ bool TABBPoro::CompruebaNodos(const TABBPoro &esteArbol, const TABBPoro &otroArb
 }
 
 bool TABBPoro::operator ==(const TABBPoro &otroArbol) {
-	return CompruebaNodos((*this), otroArbol);
+//	return CompruebaNodos((*this), otroArbol);
+	if(Nodos() == otroArbol.Nodos())
+		return CompruebaNodos(otroArbol);
+	else
+		return false;
 }
 
 bool TABBPoro::EsVacio() const{
@@ -280,23 +290,25 @@ TNodoABB TABBPoro::BuscaMayorIzq(const TABBPoro &arbol)
 		/*
 		 * BuscaMayor devuelve un nodo normal y por eso se puede hacer de esta manera
 		 */
-		TNodoABB aux2;
-		aux2 = BuscaMayorIzq(arbol.nodo->de);
-		return aux2;
+//		TNodoABB aux2;
+//		aux2 = BuscaMayorIzq(arbol.nodo->de);
+//		return aux2;
+		aux = arbol.nodo->de.nodo;
+//		return *aux;
 	}
-	else
+//	else
 		return *aux;
 
 }
 
-bool TABBPoro::Buscar(const TPoro &poro) {
+bool TABBPoro::Buscar(const TPoro &poro) const {
 	if(EsVacio())
 		return false;
 	else
 		return BuscarAux(poro);
 }
 
-bool TABBPoro::BuscarAux(const TPoro &poro)
+bool TABBPoro::BuscarAux(const TPoro &poro) const
 {
 	if(nodo->item == poro)
 		return true;
