@@ -208,27 +208,30 @@ int main(){
 		//Limpia el contenido del buffer
 		buffer.str( std::string() );
 		buffer.clear();
-//		a.Borrar(p1);
-//		a.Borrar(p2);
-//		a.Borrar(p3);
-//		a.Borrar(p4);
-//		a.Borrar(p5);
-//		a.Borrar(p6);
-//		a.Borrar(p7);
-//		a.Borrar(p8);
-//		a.Borrar(p9);
-//		a.Borrar(p10);
-//		a.Borrar(p11);
-//		a.Borrar(p12);
-//		a.Borrar(p13);
-//		a.Borrar(p14);
-//		a.Borrar(p15);
-//		a.Borrar(p16);
-//		a.Borrar(p17);
-//		if(a.EsVacio())
-//			cout << "P16- OK\n";
-//		else cout << "P16- NOPE\n";
-//		cout << a << endl;
+
+
+		a.Borrar(p1);
+		a.Borrar(p2);
+		a.Borrar(p3);
+		a.Borrar(p4);
+		a.Borrar(p5);
+		a.Borrar(p6);
+		a.Borrar(p7);
+		a.Borrar(p8);
+		a.Borrar(p9);
+		a.Borrar(p10);
+		a.Borrar(p11);
+		a.Borrar(p12);
+		a.Borrar(p13);
+		a.Borrar(p14);
+		a.Borrar(p15);
+		a.Borrar(p16);
+		a.Borrar(p17);
+
+		if(a.EsVacio())
+			cout << "P16- OK\n";
+		else cout << "P16- NOPE\n";
+		cout << a << endl;
 		if(d.NodosHoja()==8 && a.NodosHoja()==5 && c.NodosHoja()==0)
 			cout << "P17- OK\n";
 		else cout << "P17- NOPE\n";
@@ -242,7 +245,18 @@ int main(){
 		buffer.str( std::string() );
 		buffer.clear();
 
-		cout << a.Raiz() << c.Raiz();
+		TABBPoro e(d);
+		if(d == e)
+			cout << "P19- OK\n";
+		else cout << "P19- NOPE\n";
+		if(d==c)
+			cout << "P20- NOPE\n";
+		else cout << "P20- OK\n";
+		e.~TABBPoro();
+		if(c == e)
+			cout << "P21- OK\n";
+		else cout << "P21- NOPE\n";
+
 
 	}
 }
