@@ -390,7 +390,7 @@ TVectorPoro TABBPoro::Niveles() {
 TABBPoro TABBPoro::operator +(TABBPoro &arbol) {
 	TABBPoro aux((*this));
 	TVectorPoro vectorArbol(arbol.Inorden());
-	for(int i=0; i<vectorArbol.Longitud(); i++)
+	for(int i=1; i<=vectorArbol.Longitud(); i++)
 		aux.Insertar(vectorArbol[i]);
 	return aux;
 }
@@ -398,7 +398,7 @@ TABBPoro TABBPoro::operator +(TABBPoro &arbol) {
 TABBPoro TABBPoro::operator -(TABBPoro &arbol) {
 	TVectorPoro vectorThis = Inorden();
 	TABBPoro aux;
-	for (int i=0; i<vectorThis.Longitud(); i++)
+	for (int i=1; i<=vectorThis.Longitud(); i++)
 	{
 		if(!arbol.Buscar(vectorThis[i]))
 			aux.Insertar(vectorThis[i]);

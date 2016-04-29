@@ -243,7 +243,6 @@ int main(){
 		a.Borrar(p7);
 		a.Borrar(p8);
 		a.Borrar(p9);
-//		cout << a << endl;	//Falla aqui, el 24 está a la derecha del 25, cuando no tendría que estar
 		a.Borrar(p10);
 		a.Borrar(p11);
 		a.Borrar(p12);
@@ -285,6 +284,36 @@ int main(){
 			cout << "P22- OK\n";
 		else
 			cout << "P22- NOPE\n";
+
+		b.~TABBPoro();
+		a.Insertar(p1);
+		a.Insertar(p2);
+		a.Insertar(p3);
+		b.Insertar(p5);
+		b.Insertar(p12);
+		b.Insertar(p3);
+		b.Insertar(p8);
+		b.Insertar(p4);
+		b.Insertar(p6);
+		a = a+b;
+		buffer << a;
+		esperado = "[1 (20, 20) 20.00 - 2 (10, 10) 10.00 - 3 (30, 30) 30.00 - 4 (3, 3) 3.00 - 5 (15, 15) 15.00 - 6 (22, 22) 22.00 - 7 (40, 40) 40.00 - 8 (5, 5) 5.00 -]";
+		if(esperado.compare(buffer.str())==0)
+			cout << "P23- OK\n";
+		else cout << "P23- NOPE\n";
+		//Limpia el contenido del buffer
+		buffer.str( std::string() );
+		buffer.clear();
+
+		a = a-b;
+		buffer << a;
+		esperado = "[1 (10, 10) 10.00 - 2 (20, 20) 20.00 -]";
+		if(esperado.compare(buffer.str())==0)
+			cout << "P24- OK\n";
+		else cout << "P24- NOPE\n";
+		//Limpia el contenido del buffer
+		buffer.str( std::string() );
+		buffer.clear();
 
 	}
 }
