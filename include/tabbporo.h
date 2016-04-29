@@ -37,8 +37,10 @@ private:
 	bool CompruebaNodos(const TABBPoro &);
 	//Comprueba si un nodo es un nodo hoja
 	bool EsHoja() const;
-	//Busca el mayor nodo hijo de la izquierda
-	TNodoABB BuscaMayorIzq(const TABBPoro &);
+	//Busca el mayor nodo hijo de la izquierda y lo sustituye por el nodo a borrar
+	void SustituyeMayorIzq();
+	//Sustituye un nodo por su hijo para borrar
+	void SustituyePorHijo();
 public:
 	// Constructor por defecto
 	TABBPoro();

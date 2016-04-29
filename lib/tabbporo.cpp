@@ -229,76 +229,62 @@ bool TABBPoro::Insertar(const TPoro &poro) {
 }
 
 bool TABBPoro::Borrar(TPoro &poro) {
-	if(!EsVacio())
+	if(!EsVacio() && Buscar(poro))
 	{
-		if(Buscar(poro))
+		if(nodo->item == poro)
 		{
-			if(nodo->item == poro && EsHoja())
+			if(EsHoja() || nodo->iz.EsVacio() || nodo->de.EsVacio())
 			{
-				(*this).~TABBPoro();
+				//El nodo es sustituido por el hijo
+				SustituyePorHijo();
 				return true;
 			}
-			else if(nodo->item == poro && !EsHoja())
+			else
 			{
-				/*
-				 * A partir del nodo donde se encuentra el item se busca el mayor de la izquierda,
-				 * se sustituyen los valores del nodo hoja y del nodo a borrar
-				 * y se llama a la recursión para borrar el item que ahora será un nodo hoja
-				 * Entremedias hay que borrar el poro hoja que seguirá teniendo el mismo resultado
-				 * Ver si la idea de los punteros funciona, sino cambiarlo a referencias normales loki
-				 */
-				TNodoABB aux;
-				aux = BuscaMayorIzq((*this));
-				Borrar(aux.item);
-				TPoro poroApoyo = aux.item;
-				aux.item = nodo->item;
-				nodo->item = poroApoyo;
-
-				Borrar(poro);
+				SustituyeMayorIzq();
+				return true;
 			}
-			else if(poro.Volumen() < nodo->item.Volumen() && !nodo->iz.EsVacio())
-				nodo->iz.Borrar(poro);
-			else if(poro.Volumen() > nodo->item.Volumen() && !nodo->de.EsVacio())
-				nodo->de.Borrar(poro);
 		}
-		else
-			return false;
+		else if(poro.Volumen() < nodo->item.Volumen() && !nodo->iz.EsVacio())
+		nodo->iz.Borrar(poro);
+		else if(poro.Volumen() > nodo->item.Volumen() && !nodo->de.EsVacio())
+		nodo->de.Borrar(poro);
 	}
-	else return false;
+	else
+		return false;
 }
-TNodoABB TABBPoro::BuscaMayorIzq(const TABBPoro &arbol)
-{
-	/*
-	 * BuscaMayor puede devolver un *nodo, pero siempre será un nodo normal en otras funciones
-	 * Si es una raiz o nodo hoja los devuelve sin mas, el problema es cuando el nodo borrado no tiene hijos izquierdos,
-	 * entonces hay que buscar el MayorIzq del hijo derecho, que puede ser recursivo a la derecha y al final devolver un nodo hoja si
-	 * es una lista ordenada del modo 1->3->5->7 y borrar el 3
-	 * PD: vaya rallada
-	 */
-	TNodoABB *aux = arbol.nodo;
-	if(!arbol.nodo->iz.EsVacio())
-	{
-		aux = arbol.nodo->iz.nodo;
-		while(!aux->de.EsVacio())
-		{
-			aux = aux->de.nodo;
-		}
-		return *aux;
-	}
-	else if(!arbol.nodo->de.EsVacio())
-	{
-		/*
-		 * BuscaMayor devuelve un nodo normal y por eso se puede hacer de esta manera
-		 */
-//		TNodoABB aux2;
-//		aux2 = BuscaMayorIzq(arbol.nodo->de);
-//		return aux2;
-		aux = arbol.nodo->de.nodo;
-//		return *aux;
-	}
-//	else
-		return *aux;
 
+void TABBPoro::SustituyePorHijo()
+{
+	TABBPoro aux;
+	if(EsHoja())
+		(*this).~TABBPoro();
+	else if(!nodo->iz.EsVacio())
+	{
+		//sustituir por el hijo izquierdo
+		aux = nodo->iz;
+		(*this) = aux;
+	}
+	else if(!nodo->de.EsVacio())
+	{
+		//sustituir por el hijo derecho
+		aux = nodo->de;
+		(*this) = aux;
+	}
+}
+void TABBPoro::SustituyeMayorIzq()
+{
+	TNodoABB *mayorIzq = nodo;
+	TNodoABB *aux = nodo; //apoyo para intercambiar los valores de los nodos
+	if(!nodo->iz.EsVacio())
+	{
+		//moverse 1 a la izq y todo a la derecha hasta que esté vacío
+		mayorIzq = nodo->iz.nodo;
+		while(!mayorIzq->de.EsVacio())
+			mayorIzq = mayorIzq->de.nodo;
+		nodo->item = mayorIzq->item;
+		nodo->iz.Borrar(mayorIzq->item); //Borra en este subarbol el mayor de la izquierda que acaba de ser sustituido
+	}
 }
 
 bool TABBPoro::Buscar(const TPoro &poro) const {

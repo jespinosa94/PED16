@@ -34,8 +34,10 @@ int main(){
 		TPoro p14(38, 38, 38);
 		TPoro p15(39, 39, 39);
 		TPoro p16(37, 37, 37);
-
 		TPoro p17(9, 9, 9);
+		TPoro p18(8, 8, 8);
+		TPoro p19(17, 17, 17);
+		TPoro p20(11, 11, 11);
 
 		if(a.EsVacio())
 			cout << "P1- OK\n";
@@ -179,6 +181,28 @@ int main(){
 		buffer.str( std::string() );
 		buffer.clear();
 
+
+//		/******************************************13.5*********************************************/
+//		a.~TABBPoro();
+//		a.Insertar(p19);
+//		a.Insertar(p18);
+//		a.Insertar(p11);
+//		a.Insertar(p5);
+//		a.Insertar(p20);
+//		a.Insertar(p4);
+//		a.Borrar(p11);
+//		cout << a;
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//		/****************************************************************/
+
 		a = b; //a vuelve a ser el arbol de prueba
 		TABBPoro d(a);
 		//este es el de la rallada de la lista ordenada en el arbol
@@ -210,24 +234,24 @@ int main(){
 		buffer.clear();
 
 //		cout << a << endl;
-//		a.Borrar(p1);
-//		a.Borrar(p2);
-//		a.Borrar(p3);
-//		a.Borrar(p4);
-//		a.Borrar(p5);
-//		a.Borrar(p6);
-//		a.Borrar(p7);
-//		a.Borrar(p8);
-//		a.Borrar(p9);
+		a.Borrar(p1);
+		a.Borrar(p2);
+		a.Borrar(p3);
+		a.Borrar(p4);
+		a.Borrar(p5);
+		a.Borrar(p6);
+		a.Borrar(p7);
+		a.Borrar(p8);
+		a.Borrar(p9);
 //		cout << a << endl;	//Falla aqui, el 24 está a la derecha del 25, cuando no tendría que estar
-//		a.Borrar(p10);
-//		a.Borrar(p11);
-//		a.Borrar(p12);
-//		a.Borrar(p13);
-//		a.Borrar(p14);
-//		a.Borrar(p15);
-//		a.Borrar(p16);
-//		a.Borrar(p17);
+		a.Borrar(p10);
+		a.Borrar(p11);
+		a.Borrar(p12);
+		a.Borrar(p13);
+		a.Borrar(p14);
+		a.Borrar(p15);
+		a.Borrar(p16);
+		a.Borrar(p17);
 
 		if(a.EsVacio())
 			cout << "P16- OK\n";
@@ -257,7 +281,10 @@ int main(){
 			cout << "P21- OK\n";
 		else cout << "P21- NOPE\n";
 
-		cout << a << endl << b << endl << c << endl << d << endl << e << endl;
+		if(a.Altura()==0 && b.Altura()==5 && d.Altura()==6)
+			cout << "P22- OK\n";
+		else
+			cout << "P22- NOPE\n";
 
 	}
 }
