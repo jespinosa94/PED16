@@ -43,7 +43,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/TVectorPoro_comp.cpp|src/TPoro_comp.cpp|src/TListaPoro_comp.cpp|src/compilation.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/TABBPoro_comp.cpp|TADs de prueba ABB poro/TABBPoro-01.cpp|TADs de prueba ABB poro/TABBPoro-17.cpp|TADs de prueba ABB poro/TABBPoro-16.cpp|TADs de prueba ABB poro/TABBPoro-11.cpp|TADs de prueba ABB poro/TABBPoro-10.cpp|TADs de prueba ABB poro/TABBPoro-09.cpp|TADs de prueba ABB poro/TABBPoro-08.cpp|TADs de prueba ABB poro/TABBPoro-07.cpp|TADs de prueba ABB poro/TABBPoro-06.cpp|TADs de prueba ABB poro/TABBPoro-05.cpp|TADs de prueba ABB poro/TABBPoro-03.cpp|src/TVectorPoro_comp.cpp|src/TPoro_comp.cpp|src/TListaPoro_comp.cpp|src/compilation.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -91,7 +91,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="src/TVectorPoro_comp.cpp|src/TPoro_comp.cpp|src/TListaPoro_comp.cpp|src/compilation.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="src/TABBPoro_comp.cpp|TADs de prueba ABB poro/TABBPoro-01.cpp|TADs de prueba ABB poro/TABBPoro-17.cpp|TADs de prueba ABB poro/TABBPoro-16.cpp|TADs de prueba ABB poro/TABBPoro-11.cpp|TADs de prueba ABB poro/TABBPoro-10.cpp|TADs de prueba ABB poro/TABBPoro-09.cpp|TADs de prueba ABB poro/TABBPoro-08.cpp|TADs de prueba ABB poro/TABBPoro-07.cpp|TADs de prueba ABB poro/TABBPoro-06.cpp|TADs de prueba ABB poro/TABBPoro-05.cpp|TADs de prueba ABB poro/TABBPoro-03.cpp|src/TVectorPoro_comp.cpp|src/TPoro_comp.cpp|src/TListaPoro_comp.cpp|src/compilation.cpp" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
