@@ -11,12 +11,26 @@
 #include "../include/tvectorporo.h"
 #include "../include/tlistaporo.h"
 #include "../include/tabbporo.h"
+#include "../include/tavlporo.h"
 using namespace std;
 /*-Si no se va a modificar la variable de dentro de la función poner const
  *-Si no se va a modificar ningún valor dentro de la funcion poner const al final de la funcion
  */
 int main(){
-	cout << "Empezamos las pruebas del cuadernillo 3\n";
+	cout << "Comienzo de las pruebas del cuadernillo 3...\n";
+
+	TAVLPoro a;
+
+	if(a.EsVacio())
+		cout << "P1- OK\n";
+	else
+		cout << "P1- NOPE\n";
+
+
+
+
+
+
 //	{
 //		TABBPoro a;
 //		TPoro p1(20, 20, 20);

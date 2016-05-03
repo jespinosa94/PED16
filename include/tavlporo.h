@@ -31,14 +31,14 @@ public:
 	//Destructor
 	~ TAVLPoro ();
 	// Sobrecarga del operador asignación
-	TAVLPoro & operator=( TAVLPoro &);
+	TAVLPoro & operator=(const TAVLPoro &);
 
 	// Sobrecarga del operador igualdad
 	bool operator==( TAVLPoro &);
 	// Sobrecarga del operador desigualdad
-	bool operator!=( TAVLPoro &);
+	bool operator!=(const TAVLPoro &);
 	// Devuelve TRUE si el árbol está vacío, FALSE en caso contrario
-	bool EsVacio();
+	bool EsVacio() const;
 	// Inserta el elemento en el árbol
 	bool Insertar(TPoro &);
 	// Devuelve true si el elemento está en el árbol, false en caso contrario
@@ -68,6 +68,8 @@ private:
 	TAVLPoro iz, de;
 	// Factor de equilibrio
 	int fe;
+	//Módulo auxiliar para copiar los atributos del nodo
+	void Copiar(const TNodoAVL &);
 public:
 	//Constructor por defecto
 	TNodoAVL ();

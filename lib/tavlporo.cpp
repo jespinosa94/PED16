@@ -7,16 +7,33 @@
 
 #include "../include/tavlporo.h"
 
-TNodoAVL::TNodoAVL() {
+TNodoAVL::TNodoAVL(): item(), iz(), de() {
+	fe = 0;
 }
 
-TNodoAVL::TNodoAVL(TNodoAVL&) {
+TNodoAVL::TNodoAVL(TNodoAVL &origen) {
+	Copiar(origen);
 }
 
 TNodoAVL::~TNodoAVL() {
+	fe = 0;
 }
 
-TNodoAVL& TNodoAVL::operator =(TNodoAVL&) {
+TNodoAVL& TNodoAVL::operator =(TNodoAVL &origen) {
+	if(this != &origen)
+	{
+		(*this).~TNodoAVL();
+		Copiar(origen);
+	}
+	return *this;
+}
+void TNodoAVL::Copiar(const TNodoAVL &origen) {
+	(this)->item = origen.item;
+	if(!origen.de.EsVacio())
+		(this)->de = origen.de;
+	if(!origen.iz.EsVacio())
+		(this)->iz = origen.iz;
+	fe = origen.fe;
 }
 
 /*************************************************************************
@@ -33,6 +50,7 @@ void TAVLPoro::PostordenAux(TVectorPoro&, int&) {
 }
 
 TAVLPoro::TAVLPoro() {
+	raiz = NULL;
 }
 
 TAVLPoro::TAVLPoro(TAVLPoro&) {
@@ -41,16 +59,17 @@ TAVLPoro::TAVLPoro(TAVLPoro&) {
 TAVLPoro::~TAVLPoro() {
 }
 
-TAVLPoro& TAVLPoro::operator =(TAVLPoro&) {
+TAVLPoro& TAVLPoro::operator =(const TAVLPoro&) {
 }
 
 bool TAVLPoro::operator ==(TAVLPoro&) {
 }
 
-bool TAVLPoro::operator !=(TAVLPoro&) {
+bool TAVLPoro::operator !=(const TAVLPoro&) {
 }
 
-bool TAVLPoro::EsVacio() {
+bool TAVLPoro::EsVacio() const {
+	return raiz==NULL;
 }
 
 bool TAVLPoro::Insertar(TPoro&) {
