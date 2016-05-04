@@ -20,8 +20,12 @@ int main(){
 	cout << "Comienzo de las pruebas del cuadernillo 3...\n";
 
 	TAVLPoro a;
+	TPoro a1(1, 1, 1);
+	TPoro a2(2, 2, 2);
+	TPoro a3(3, 3, 3);
 	TPoro a4(4, 4, 4);
 	TPoro a5(5, 5, 5);
+	TPoro a6(6, 6, 6);
 	TPoro a7(7, 7, 7);
 
 	if(a.EsVacio())
@@ -41,10 +45,17 @@ int main(){
 //	comp.str(std::string());
 	comp.clear();
 
-	a.Insertar(a4);
+	if(a.Insertar(a4))
+		cout << "P3- OK\n";
+	else cout << "P3- NOPE\n";
 	a.Insertar(a5);
 	a.Insertar(a7);
-
+	if(a.Insertar(a2))
+		cout << "P4- OK\n";
+	else cout << "P4- NOPE\n";
+	a.Insertar(a1);
+	a.Insertar(a3);
+	a.Insertar(a6);
 	cout << a;
 
 	cout << "\nFin de las pruebas :)";
