@@ -12,7 +12,7 @@ TNodoAVL::TNodoAVL(): item(), iz(), de() {
 }
 
 TNodoAVL::TNodoAVL(TNodoAVL &origen) {
-	Copiar(origen);
+	CopiarNodo(origen);
 }
 
 TNodoAVL::~TNodoAVL() {
@@ -23,11 +23,11 @@ TNodoAVL& TNodoAVL::operator =(TNodoAVL &origen) {
 	if(this != &origen)
 	{
 		(*this).~TNodoAVL();
-		Copiar(origen);
+		CopiarNodo(origen);
 	}
 	return *this;
 }
-void TNodoAVL::Copiar(const TNodoAVL &origen) {
+void TNodoAVL::CopiarNodo(const TNodoAVL &origen) {
 	(this)->item = origen.item;
 	if(!origen.de.EsVacio())
 		(this)->de = origen.de;
@@ -74,13 +74,35 @@ TAVLPoro::TAVLPoro() {
 	raiz = NULL;
 }
 
-TAVLPoro::TAVLPoro(TAVLPoro&) {
+void TAVLPoro::Copiar(const TAVLPoro &origen){
+	if(!origen.EsVacio())
+	{
+		TNodoAVL *aux = new TNodoAVL();
+		aux->item = origen.raiz->item;
+		aux->fe = origen.raiz->fe;
+		raiz = aux;
+		raiz->iz.Copiar(origen.raiz->iz);
+		raiz->de.Copiar(origen.raiz->de);
+	}
+	else
+		raiz = NULL;
+}
+
+TAVLPoro::TAVLPoro(TAVLPoro &origen) {
+	Copiar(origen);
 }
 
 TAVLPoro::~TAVLPoro() {
+	raiz = NULL;
 }
 
-TAVLPoro& TAVLPoro::operator =(const TAVLPoro&) {
+TAVLPoro & TAVLPoro::operator=(const TAVLPoro &origen) {
+	if(this != &origen)
+	{
+		(this)->~TAVLPoro();
+		Copiar(origen);
+	}
+	return *this;
 }
 
 bool TAVLPoro::operator ==(const TAVLPoro&) {
@@ -124,6 +146,55 @@ void TAVLPoro::BuscaInserta(TNodoAVL *nuevo){
 	}
 }
 
+void TAVLPoro::RotaDD()
+{
+	TNodoAVL *b = raiz;
+	TNodoAVL *d = raiz->de.raiz;
+	TNodoAVL *c = raiz->de.raiz->iz.raiz;
+	raiz = d;
+	b->de.raiz = c;
+	raiz->iz.raiz = b;
+}
+
+void TAVLPoro::RotaII() {
+	TNodoAVL *d = raiz;
+	TNodoAVL *b = raiz->iz.raiz;
+	TNodoAVL *c = b->de.raiz;
+	raiz = raiz->iz.raiz;
+	raiz->de.raiz = d;
+	raiz->de.raiz->iz.raiz = c;
+}
+
+void TAVLPoro::RotaID() {
+	raiz->iz.RotaDD();
+	RotaII();
+}
+
+void TAVLPoro::RotaDI() { //BUGASO EN TU CARA!!!!
+	raiz->de.RotaDD();
+	RotaII();
+}
+
+void TAVLPoro::Reordenar() {
+	if(!EsVacio())
+	{
+		raiz->iz.Reordenar();
+		raiz->de.Reordenar();
+		raiz->fe = raiz->de.Altura() - raiz->iz.Altura();
+		if(raiz->fe!=-1 && raiz->fe!=0 && raiz->fe!=1)
+		{
+			//Rotación DD (+2, +1)
+			if(raiz->fe==2 && raiz->de.raiz->fe==1)
+				RotaDD();
+			else if(raiz->fe==-2 && raiz->iz.raiz->fe==-1)
+				RotaII();
+			else if(raiz->fe==-2 && raiz->iz.raiz->fe==1)
+				RotaID();
+		}
+	}
+
+}
+
 bool TAVLPoro::Insertar(const TPoro &poro) {
 	TNodoAVL *nuevo = new TNodoAVL();
 	nuevo->item = poro;
@@ -136,8 +207,8 @@ bool TAVLPoro::Insertar(const TPoro &poro) {
 	{
 		//Insertar donde toque
 		BuscaInserta(nuevo);
-		//Calcular el factor de equilibrio de todo el arbol
-		//Reordenar
+		//Calcular el factor de equilibrio de todo el arbol y reordenar
+		Reordenar();
 		return true;
 	}
 	return false;
