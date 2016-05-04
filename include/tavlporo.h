@@ -30,6 +30,18 @@ private:
 	int NodosAux(int total) const;
 	//Auxiliar para buscar un poro en el árbol AVL mediante recursión por la cola
 	bool BuscarAux(const TPoro &poro) const;
+	//Calcula el factor de equilibrio de cada nodo y reordena el arbol
+    void Reordenar();
+    //Auxiliar que copia todos los elementos de un arbol en otro
+    void Copiar(const TAVLPoro &origen);
+    //Rotación DD de un árbol (+2, +1)
+    void RotaDD();
+    //Rotación II de un árbol (-2, -1)
+    void RotaII();
+    //Rotación ID de un árbol (-2, +1)
+    void RotaID();
+    //Rotación DI de un árbol (+2, -1)
+    void RotaDI();
 
 public:
 	//Constructor por defecto
@@ -78,7 +90,7 @@ private:
 	// Factor de equilibrio
 	int fe;
 	//Módulo auxiliar para copiar los atributos del nodo
-	void Copiar(const TNodoAVL &);
+	void CopiarNodo(const TNodoAVL &);
 public:
 	//Constructor por defecto
 	TNodoAVL ();
