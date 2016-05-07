@@ -69,6 +69,9 @@ int main(){
 	if(esperado.compare(comp.str())==0)
 		cout << "P5- OK\n";
 	else cout << "P6- NOPE\n";
+	//Limpia el contenido del buffer
+	comp.str( std::string() );
+	comp.clear();
 
 	if(b.Insertar(a1) && b.Insertar(a2) && b.Insertar(a3) && b.Insertar(a4) && b.Insertar(a5)
 			&& b.Insertar(a6) && b.Insertar(a7) && !b.Insertar(a1))
@@ -98,7 +101,45 @@ int main(){
 		cout << "P9- OK\n";
 	else cout << "P9- NOPE\n";
 
-	cout << b;
+	comp << b;
+	esperado = "[1 (3, 3) 3.00 - 2 (9, 9) 9.00 - 3 (10, 10) 10.00 - 4 (11, 11) 11.00 -]";
+	if(esperado.compare(comp.str())==0)
+		cout << "P10- OK\n";
+	else cout << "P10- NOPE\n";
+	//Limpia el contenido del buffer
+	comp.str( std::string() );
+	comp.clear();
+
+	b.Borrar(a10);
+	b.Borrar(a11);
+	b.Borrar(a3);
+	b.Borrar(a9);
+	if(b.EsVacio())
+		cout << "P11- OK\n";
+	else cout << "P11- NOPE\n";
+
+	c = a;
+	if(c==a && b!=a && b!= c)
+		cout << "P12- OK\n";
+	else cout << "P12- NOPE\n";
+
+	TAVLPoro d(c);
+	if(d==a)
+		cout << "P13- OK\n";
+	else cout << "P13- NOPE\n";
+	b.~TAVLPoro();
+	comp << b.Raiz() << a.Raiz();
+	esperado = "()(4, 4) 4.00 -";
+	if(esperado.compare(comp.str())==0)
+		cout << "P14- OK\n";
+	else cout << "P14- NOPE\n";
+	//Limpia el contenido del buffer
+	comp.str( std::string() );
+	comp.clear();
+
+	if(a.NodosHoja()==4 && b.NodosHoja()==0)
+		cout << "P15- OK\n";
+	else cout << "P15- NOPE\n";
 
 	cout << "\nFin de las pruebas :)";
 }

@@ -16,6 +16,7 @@ class TAVLPoro {
 private:
 	// Puntero al nodo raíz
 	TNodoAVL *raiz;
+	TPoro error;
 	// Devuelve el recorrido en inorden
 	void InordenAux(TVectorPoro &, int &);
 	// Devuelve el recorrido en preorden

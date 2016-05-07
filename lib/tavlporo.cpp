@@ -70,7 +70,7 @@ void TAVLPoro::PostordenAux(TVectorPoro &vector, int &posicion) {
 	}
 }
 
-TAVLPoro::TAVLPoro() {
+TAVLPoro::TAVLPoro(): error(){
 	raiz = NULL;
 }
 
@@ -83,6 +83,7 @@ void TAVLPoro::Copiar(const TAVLPoro &origen){
 		raiz = aux;
 		raiz->iz.Copiar(origen.raiz->iz);
 		raiz->de.Copiar(origen.raiz->de);
+		error = origen.error;
 	}
 	else
 		raiz = NULL;
@@ -122,7 +123,8 @@ bool TAVLPoro::operator ==(const TAVLPoro &otroArbol) {
 		return false;
 }
 
-bool TAVLPoro::operator !=(const TAVLPoro&) {
+bool TAVLPoro::operator !=(const TAVLPoro &otroArbol) {
+	return !(*this == otroArbol);
 }
 
 bool TAVLPoro::EsVacio() const {
@@ -273,6 +275,14 @@ int TAVLPoro::Nodos() const {
 }
 
 int TAVLPoro::NodosHoja() const{
+	int a1=0;
+	if(!EsVacio())
+	{
+		a1 = a1 + raiz->iz.NodosHoja() + raiz->de.NodosHoja();
+		if(EsHoja())
+			a1++;
+	}
+	return a1;
 }
 
 TVectorPoro TAVLPoro::Inorden() {
@@ -376,6 +386,10 @@ bool TAVLPoro::Borrar(const TPoro &poro) {
 }
 
 TPoro TAVLPoro::Raiz() {
+	if(!EsVacio())
+		return raiz->item;
+	else
+		return error;
 }
 
 ostream & operator<<(ostream &os, TAVLPoro &avl) {
