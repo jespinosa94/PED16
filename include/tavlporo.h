@@ -42,6 +42,13 @@ private:
     void RotaID();
     //Rotación DI de un árbol (+2, -1)
     void RotaDI();
+    //Auxiliar que busca los nodos de un arbol en otro
+    bool CompruebaNodos(const TAVLPoro &otroArbol);
+    //Borrado del árbol binario de búsqueda
+    bool BorrarAB(const TPoro &poro);
+    bool EsHoja() const;
+    void SustituyePorHijo();
+    void SustituyeMayorIzq();
 
 public:
 	//Constructor por defecto

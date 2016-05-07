@@ -20,6 +20,8 @@ int main(){
 	cout << "Comienzo de las pruebas del cuadernillo 3...\n";
 
 	TAVLPoro a;
+	TAVLPoro b;
+	TAVLPoro c;
 	TPoro a1(1, 1, 1);
 	TPoro a2(2, 2, 2);
 	TPoro a3(3, 3, 3);
@@ -27,6 +29,10 @@ int main(){
 	TPoro a5(5, 5, 5);
 	TPoro a6(6, 6, 6);
 	TPoro a7(7, 7, 7);
+	TPoro a8(8, 8, 8);
+	TPoro a9(9, 9, 9);
+	TPoro a10(10, 10, 10);
+	TPoro a11(11, 11, 11);
 
 	if(a.EsVacio())
 		cout << "P1- OK\n";
@@ -42,7 +48,7 @@ int main(){
 	else
 		cout << "P2- NOPE\n";
 	//Limpia el contenido del buffer
-//	comp.str(std::string());
+	comp.str( std::string() );
 	comp.clear();
 
 	if(a.Insertar(a4))
@@ -54,9 +60,45 @@ int main(){
 		cout << "P4- OK\n";
 	else cout << "P4- NOPE\n";
 	a.Insertar(a1);
+	a.Insertar(a5);
 	a.Insertar(a3);
 	a.Insertar(a6);
-	cout << a;
+
+	comp << a;
+	esperado = "[1 (1, 1) 1.00 - 2 (2, 2) 2.00 - 3 (3, 3) 3.00 - 4 (4, 4) 4.00 - 5 (5, 5) 5.00 - 6 (6, 6) 6.00 - 7 (7, 7) 7.00 -]";
+	if(esperado.compare(comp.str())==0)
+		cout << "P5- OK\n";
+	else cout << "P6- NOPE\n";
+
+	if(b.Insertar(a1) && b.Insertar(a2) && b.Insertar(a3) && b.Insertar(a4) && b.Insertar(a5)
+			&& b.Insertar(a6) && b.Insertar(a7) && !b.Insertar(a1))
+		cout << "P6- OK\n";
+	else cout << "P6- NOPE\N";
+	if(b == a)
+		cout << "P7- OK\n";
+	else cout << "P7- NOPE\n";
+
+	b.~TAVLPoro();
+	if(b.EsVacio() && !a.EsVacio() && b==c)
+		cout << "P8- OK\n";
+	else cout << "P8- NOPE\n";
+	b.Insertar(a5);
+	b.Insertar(a3);
+	b.Insertar(a8);
+	b.Insertar(a2);
+	b.Insertar(a4);
+	b.Insertar(a7);
+	b.Insertar(a10);
+	b.Insertar(a1);
+	b.Insertar(a6);
+	b.Insertar(a9);
+	b.Insertar(a11);
+
+	if(b.Borrar(a4) && !b.Borrar(a4) && b.Borrar(a8) && b.Borrar(a6) && b.Borrar(a5) && b.Borrar(a2) && b.Borrar(a1) && !b.Borrar(a8) && b.Borrar(a7))
+		cout << "P9- OK\n";
+	else cout << "P9- NOPE\n";
+
+	cout << b;
 
 	cout << "\nFin de las pruebas :)";
 }

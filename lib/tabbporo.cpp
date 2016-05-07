@@ -129,31 +129,9 @@ bool TABBPoro::CompruebaNodos(const TABBPoro &otroArbol)
 	{
 		return (otroArbol.Buscar(nodo->item) && nodo->iz.CompruebaNodos(otroArbol) && nodo->de.CompruebaNodos(otroArbol));
 	}
-//	if(esteArbol.Nodos() == otroArbol.Nodos())
-//	{
-//		if(esteArbol.EsVacio())
-//			return true;
-//		else
-//		{
-//			return (otroArbol.Buscar(esteArbol.nodo->item) && esteArbol.CompruebaNodos()
-//		}
-//	}
-//	else
-//		return false;
-//	if(esteArbol.EsVacio() && otroArbol.EsVacio())
-//		return true;
-//	else if(!esteArbol.EsVacio() && !otroArbol.EsVacio())
-//	{
-//		if(esteArbol.nodo->item == otroArbol.nodo->item && CompruebaNodos(esteArbol.nodo->iz, otroArbol.nodo->iz) &&
-//				CompruebaNodos(esteArbol.nodo->de, otroArbol.nodo->de))
-//			return true;
-//	}
-//	else
-//		return false;
 }
 
 bool TABBPoro::operator ==(const TABBPoro &otroArbol) {
-//	return CompruebaNodos((*this), otroArbol);
 	if(Nodos() == otroArbol.Nodos())
 		return CompruebaNodos(otroArbol);
 	else

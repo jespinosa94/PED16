@@ -105,7 +105,21 @@ TAVLPoro & TAVLPoro::operator=(const TAVLPoro &origen) {
 	return *this;
 }
 
-bool TAVLPoro::operator ==(const TAVLPoro&) {
+
+bool TAVLPoro::CompruebaNodos(const TAVLPoro &otroArbol) {
+	if(EsVacio())
+		return true;
+	else
+	{
+		return (otroArbol.Buscar(raiz->item) && raiz->iz.CompruebaNodos(otroArbol) && raiz->de.CompruebaNodos(otroArbol));
+	}
+}
+
+bool TAVLPoro::operator ==(const TAVLPoro &otroArbol) {
+	if(Nodos() == otroArbol.Nodos())
+		return CompruebaNodos(otroArbol);
+	else
+		return false;
 }
 
 bool TAVLPoro::operator !=(const TAVLPoro&) {
@@ -170,9 +184,9 @@ void TAVLPoro::RotaID() {
 	RotaII();
 }
 
-void TAVLPoro::RotaDI() { //BUGASO EN TU CARA!!!!
-	raiz->de.RotaDD();
-	RotaII();
+void TAVLPoro::RotaDI() {
+	raiz->de.RotaII();
+	RotaDD();
 }
 
 void TAVLPoro::Reordenar() {
@@ -184,12 +198,14 @@ void TAVLPoro::Reordenar() {
 		if(raiz->fe!=-1 && raiz->fe!=0 && raiz->fe!=1)
 		{
 			//Rotación DD (+2, +1)
-			if(raiz->fe==2 && raiz->de.raiz->fe==1)
+			if(raiz->fe==2 && (raiz->de.raiz->fe==1 || raiz->de.raiz->fe==0))
 				RotaDD();
-			else if(raiz->fe==-2 && raiz->iz.raiz->fe==-1)
+			else if(raiz->fe==-2 && (raiz->iz.raiz->fe==-1 || raiz->iz.raiz->fe==0))
 				RotaII();
 			else if(raiz->fe==-2 && raiz->iz.raiz->fe==1)
 				RotaID();
+			else if(raiz->fe==2 && raiz->de.raiz->fe==-1)
+				RotaDI();
 		}
 	}
 
@@ -286,7 +302,77 @@ TVectorPoro TAVLPoro::Postorden() {
 	return v;
 }
 
-bool TAVLPoro::Borrar(const TPoro&) {
+
+void TAVLPoro::SustituyeMayorIzq() {
+	TNodoAVL *mayorIzq = raiz;
+	TNodoAVL *aux = raiz; //apoyo para intercambiar los valores de los nodos
+	if(!raiz->iz.EsVacio())
+	{
+		//moverse 1 a la izq y todo a la derecha hasta que esté vacío
+		mayorIzq = raiz->iz.raiz;
+		while(!mayorIzq->de.EsVacio())
+			mayorIzq = mayorIzq->de.raiz;
+		raiz->item = mayorIzq->item;
+		raiz->iz.Borrar(mayorIzq->item); //Borra en este subarbol el mayor de la izquierda que acaba de ser sustituido
+	}
+}
+
+void TAVLPoro::SustituyePorHijo() {
+	TAVLPoro aux;
+	if(EsHoja())
+		(*this).~TAVLPoro();
+	else if(!raiz->iz.EsVacio())
+	{
+		//sustituir por el hijo izquierdo
+		aux = raiz->iz;
+		(*this) = aux;
+	}
+	else if(!raiz->de.EsVacio())
+	{
+		//sustituir por el hijo derecho
+		aux = raiz->de;
+		(*this) = aux;
+	}
+}
+
+bool TAVLPoro::EsHoja() const{
+	return (raiz->de.EsVacio() && raiz->iz.EsVacio());
+}
+
+bool TAVLPoro::BorrarAB(const TPoro &poro) {
+	if(!EsVacio() && Buscar(poro))
+	{
+		if(raiz->item == poro)
+		{
+			if(EsHoja() || raiz->iz.EsVacio() || raiz->de.EsVacio())
+			{
+				//El nodo es sustituido por el hijo
+				SustituyePorHijo();
+				return true;
+			}
+			else
+			{
+				SustituyeMayorIzq();
+				return true;
+			}
+		}
+		else if(poro.Volumen() < raiz->item.Volumen() && !raiz->iz.EsVacio())
+		raiz->iz.Borrar(poro);
+		else if(poro.Volumen() > raiz->item.Volumen() && !raiz->de.EsVacio())
+		raiz->de.Borrar(poro);
+	}
+	else
+		return false;
+}
+
+bool TAVLPoro::Borrar(const TPoro &poro) {
+	if(BorrarAB(poro))
+	{
+		if(!EsVacio())
+			Reordenar();
+		return true;
+	}
+	return false;
 }
 
 TPoro TAVLPoro::Raiz() {
