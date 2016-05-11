@@ -34,7 +34,8 @@ main(void)
   if( b.Inorden() == c.Inorden() )
         cout << "MAL! SE HAN COPIADO PUNTEROS" << endl;
   else
-	cout << "CORRECTA ASIGNACION" << endl;
+	cout << "CORRECTA ASIGNACION " << endl;
+
 
 }
 {
@@ -52,6 +53,7 @@ main(void)
   cout << (a = b).Inorden() << endl;
 
   cout << (a = c).Inorden() << endl;
+
 
 
 }
@@ -80,6 +82,7 @@ main(void)
         cout << "VACIO" << endl;
   else
 	cout << "INCORRECTO Borrar()" << endl;
+
 
 
 }
@@ -131,6 +134,7 @@ main(void)
 
 
 
+
 }
 {
 /*******************************************************************/
@@ -155,7 +159,9 @@ for(int i=1; i<=2; i++)
 
 cout << "CORRECTA INSERCION MULTIPLE" << endl;
 
+
 }
+
 {
 /************************************************************************/
 /***************** INSERCION MULTIPLE (2) ; posible desborde de memoria */
@@ -186,7 +192,9 @@ for(int i=1; i<=100; i++)
 
 cout << "CORRECTA INSERCION MULTIPLE" << endl;
 
+
 }
+
 {
 /************************************/
 /***************** INORDEN, BORRADO */
@@ -232,6 +240,7 @@ cout << "CORRECTA INSERCION MULTIPLE" << endl;
 
 
 
+
 }
 {
 /************************************/
@@ -262,6 +271,7 @@ cout << "CORRECTA INSERCION MULTIPLE" << endl;
   	cout << "Error NO BORRADO" << endl;
 
   cout << a.Inorden() << endl;
+
 
 
 }
@@ -307,6 +317,7 @@ cout << "CORRECTA INSERCION MULTIPLE" << endl;
   cout << a.Inorden() << endl;
 
 
+
 }
 {
 /**********************************************/
@@ -346,7 +357,9 @@ cout << "CORRECTA INSERCION MULTIPLE" << endl;
   busc2 = a.Buscar(p1);
   cout <<"Encontrado = "<<busc2<<endl;
 
+
 }
+
 {
 /**********************************************/
 /***************** ALTURA, NODOS, NODOSHOJA   */
@@ -393,6 +406,64 @@ cout << "CORRECTA INSERCION MULTIPLE" << endl;
   cout <<"Nodos: "<<a.Nodos()<<endl;
   cout <<"NodosHoja: "<<a.NodosHoja()<<endl;
   cout <<"Raiz: "<<a.Raiz()<<endl;
+
+
+
+
+}
+{
+/*******************************************************************/
+/***************** Insertar(), Borrar() */
+/*******************************************************************/
+
+  TABBPoro a,b;
+
+  TPoro p1(1,2,1,(char *) "rojo");
+  TPoro p2(1,2,2,(char *) "rojo");
+  TPoro p3(1,2,3,(char *) "rojo");
+  TPoro p4(1,2,4,(char *) "rojo");
+  TPoro p5(1,2,5,(char *) "rojo");
+  TPoro p6(1,2,6,(char *) "rojo");
+  TPoro p7(1,2,7,(char *) "rojo");
+
+  a.Insertar(p1);
+  a.Insertar(p2);
+
+  b.Insertar(p1);
+  b.Insertar(p2);
+
+  if (a==b)
+	cout << "IGUALES" << endl;
+
+
+
+
+}
+{
+/*******************************************************************/
+/***************** Insertar(), Borrar() */
+/*******************************************************************/
+
+  TABBPoro a,b;
+
+  TPoro p1(1,2,1,(char*) "rojo");
+  TPoro p2(1,2,2,(char*) "rojo");
+  TPoro p3(1,2,3,(char*) "rojo");
+  TPoro p4(1,2,4,(char*) "rojo");
+  TPoro p5(1,2,5,(char*) "rojo");
+  TPoro p6(1,2,6,(char*) "rojo");
+  TPoro p7(1,2,7,(char*) "rojo");
+
+  a.Insertar(p1);
+  a.Insertar(p2);
+
+  b.Insertar(p2);
+  b.Insertar(p1);
+
+  if (a==b)
+	cout << "IGUALES" << endl;
+
+
 
 
 
