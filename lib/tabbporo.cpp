@@ -10,7 +10,7 @@
 
 TNodoABB::TNodoABB():iz(), de(), item() {}
 
-TNodoABB::TNodoABB(TNodoABB &origen){
+TNodoABB::TNodoABB(const TNodoABB &origen){
 	Copia(origen);
 }
 
@@ -35,7 +35,7 @@ TNodoABB& TNodoABB::operator =(const TNodoABB &origen) {
 /*
  * ****************************************************************************
  */
-void TABBPoro::InordenAux(TVectorPoro &vector, int &posicion) {
+void TABBPoro::InordenAux(TVectorPoro &vector, int &posicion) const{
 	if(!EsVacio())
 	{
 		nodo->iz.InordenAux(vector, posicion);
@@ -45,7 +45,7 @@ void TABBPoro::InordenAux(TVectorPoro &vector, int &posicion) {
 	}
 }
 
-void TABBPoro::PreordenAux(TVectorPoro &vector, int &posicion) {
+void TABBPoro::PreordenAux(TVectorPoro &vector, int &posicion) const {
 	if(!EsVacio())
 	{
 		vector[posicion] = nodo->item;
@@ -55,7 +55,7 @@ void TABBPoro::PreordenAux(TVectorPoro &vector, int &posicion) {
 	}
 }
 
-void TABBPoro::PostordenAux(TVectorPoro &vector, int &posicion) {
+void TABBPoro::PostordenAux(TVectorPoro &vector, int &posicion) const {
 	if(!EsVacio())
 	{
 		nodo->iz.PostordenAux(vector, posicion);
@@ -65,8 +65,7 @@ void TABBPoro::PostordenAux(TVectorPoro &vector, int &posicion) {
 	}
 }
 
-void TABBPoro::NivelesAux(TVectorPoro &vector, int &posicion)
-{
+void TABBPoro::NivelesAux(TVectorPoro &vector, int &posicion) const {
 	TNodoABB *aux;
 	queue<TNodoABB *> cola;
 	cola.push((*this).nodo);
@@ -87,7 +86,7 @@ TABBPoro::TABBPoro(): error() {
 	nodo = NULL;
 }
 
-TABBPoro::TABBPoro(TABBPoro &origen) {
+TABBPoro::TABBPoro(const TABBPoro &origen) {
 	Copiar(origen);
 }
 
@@ -121,8 +120,7 @@ TABBPoro& TABBPoro::operator =(const TABBPoro &origen) {
 	return *this;
 }
 
-bool TABBPoro::CompruebaNodos(const TABBPoro &otroArbol)
-{
+bool TABBPoro::CompruebaNodos(const TABBPoro &otroArbol) const {
 	if(EsVacio())
 		return true;
 	else
@@ -131,7 +129,7 @@ bool TABBPoro::CompruebaNodos(const TABBPoro &otroArbol)
 	}
 }
 
-bool TABBPoro::operator ==(const TABBPoro &otroArbol) {
+bool TABBPoro::operator ==(const TABBPoro &otroArbol) const {
 	if(Nodos() == otroArbol.Nodos())
 		return CompruebaNodos(otroArbol);
 	else
@@ -193,7 +191,7 @@ bool TABBPoro::Insertar(const TPoro &poro) {
 	return false;
 }
 
-bool TABBPoro::Borrar(TPoro &poro) {
+bool TABBPoro::Borrar(const TPoro &poro) {
 	if(!EsVacio() && Buscar(poro))
 	{
 		if(nodo->item == poro)
@@ -271,14 +269,14 @@ bool TABBPoro::BuscarAux(const TPoro &poro) const
 		return false;
 }
 
-TPoro TABBPoro::Raiz() {
+TPoro TABBPoro::Raiz() const {
 	if(!EsVacio())
 		return nodo->item;
 	else
 		return error;
 }
 
-int TABBPoro::Altura() {
+int TABBPoro::Altura() const {
 	int a1, a2;
 	if(!EsVacio())
 	{
@@ -301,7 +299,7 @@ int TABBPoro::NodosAux(int total) const
 	return total;
 }
 
-int TABBPoro::NodosHoja() {
+int TABBPoro::NodosHoja() const {
 	int a1=0;
 	if(!EsVacio())
 	{
@@ -312,7 +310,7 @@ int TABBPoro::NodosHoja() {
 	return a1;
 }
 
-TVectorPoro TABBPoro::Inorden() {
+TVectorPoro TABBPoro::Inorden() const {
 	//Posición en el vector que almacena el recorrido
 	int posicion = 1;
 	//Vector del tamaño adecuado para almacenar todos los nodos
@@ -321,7 +319,7 @@ TVectorPoro TABBPoro::Inorden() {
 	return v;
 }
 
-TVectorPoro TABBPoro::Preorden() {
+TVectorPoro TABBPoro::Preorden() const {
 	//Posición en el vector que almacena el recorrido
 	int posicion = 1;
 	//Vector del tamaño adecuado para almacenar todos los nodos
@@ -330,7 +328,7 @@ TVectorPoro TABBPoro::Preorden() {
 	return v;
 }
 
-TVectorPoro TABBPoro::Postorden() {
+TVectorPoro TABBPoro::Postorden() const {
 	//Posición en el vector que almacena el recorrido
 	int posicion = 1;
 	//Vector del tamaño adecuado para almacenar todos los nodos
@@ -340,7 +338,7 @@ TVectorPoro TABBPoro::Postorden() {
 }
 
 
-TVectorPoro TABBPoro::Niveles() {
+TVectorPoro TABBPoro::Niveles() const {
 	TVectorPoro recorrido;
 	if(!EsVacio())
 	{
@@ -352,7 +350,7 @@ TVectorPoro TABBPoro::Niveles() {
 	return recorrido;
 }
 
-TABBPoro TABBPoro::operator +(TABBPoro &arbol) {
+TABBPoro TABBPoro::operator +(const TABBPoro &arbol) {
 	TABBPoro aux((*this));
 	TVectorPoro vectorArbol(arbol.Inorden());
 	for(int i=1; i<=vectorArbol.Longitud(); i++)
@@ -360,7 +358,7 @@ TABBPoro TABBPoro::operator +(TABBPoro &arbol) {
 	return aux;
 }
 
-TABBPoro TABBPoro::operator -(TABBPoro &arbol) {
+TABBPoro TABBPoro::operator -(const TABBPoro &arbol) {
 	TVectorPoro vectorThis = Inorden();
 	TABBPoro aux;
 	for (int i=1; i<=vectorThis.Longitud(); i++)
@@ -371,7 +369,7 @@ TABBPoro TABBPoro::operator -(TABBPoro &arbol) {
 	return aux;
 }
 
-ostream & operator<<(ostream &os, TABBPoro &arbol)
+ostream & operator<<(ostream &os, const TABBPoro &arbol)
 {
 	os << arbol.Niveles();
 	return os;

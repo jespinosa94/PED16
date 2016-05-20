@@ -32,19 +32,19 @@ public:
 	TVectorPoro & operator=(const TVectorPoro &);
 
 	// Sobrecarga del operador igualdad
-	bool operator==(const TVectorPoro &);
+	bool operator==(const TVectorPoro &) const;
 	// Sobrecarga del operador desigualdad
-	bool operator!=(const TVectorPoro &);
+	bool operator!=(const TVectorPoro &) const;
 	// Sobrecarga del operador corchete (parte IZQUIERDA)
 	TPoro & operator[](int);
 	// Sobrecarga del operador corchete (parte DERECHA)
 	TPoro operator[](int) const;
 	// Devuelve la longitud (dimensión) del vector
-	int Longitud();
+	int Longitud() const;
 	// Devuelve la cantidad de posiciones ocupadas (no vacías) en el vector
-	int Cantidad();
+	int Cantidad() const;
 	// REDIMENSIONAR el vector de TPoro
-	bool Redimensionar(int);
+	bool Redimensionar(const int);
 };
 
 #endif /* INCLUDE_TVECTORPORO_H_ */

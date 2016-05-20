@@ -48,9 +48,9 @@ public:
 	// Sobrecarga del operador igualdad
 	bool operator==(const TListaPosicion &) const;
 	// Devuelve la posición anterior
-	TListaPosicion Anterior();
+	TListaPosicion Anterior() const;
 	// Devuelve la posición siguiente
-	TListaPosicion Siguiente();
+	TListaPosicion Siguiente() const;
 	// Devuelve TRUE si la posición no apunta a una lista, FALSE en caso contrario
 	bool EsVacia() const;
 };
@@ -67,10 +67,10 @@ private:
 	void InsertaCola(const TPoro &);
 	void InsertaCentro(const TPoro &);
 	TListaPosicion ObtenerAnterior(const TPoro &);
-	TListaPosicion ObtenerPosicion(TPoro &);
-	void BorrarCabeza(TListaPosicion &aux);
-	void BorrarCentro(TListaPosicion &);
-	void BorrarCola(TListaPosicion &aux);
+	TListaPosicion ObtenerPosicion(const TPoro &);
+	void BorrarCabeza(const TListaPosicion &aux);
+	void BorrarCentro(const TListaPosicion &);
+	void BorrarCola(const TListaPosicion &aux);
 	void Copia(const TListaPoro &);
 	TPoro ObtenerPoro(int n);
 public:
@@ -86,21 +86,21 @@ public:
 	// Sobrecarga del operador igualdad
 	bool operator==(const TListaPoro &) const;
 	// Sobrecarga del operador suma
-	TListaPoro operator+(TListaPoro &);
+	TListaPoro operator+(const TListaPoro &);
 	// Sobrecarga del operador resta
-	TListaPoro operator-(TListaPoro &);
+	TListaPoro operator-(const TListaPoro &);
 	// Devuelve true si la lista está vacía, false en caso contrario
 	bool EsVacia() const;
 	// Inserta el elemento en la lista
 	bool Insertar(const TPoro &);
 	// Busca y borra el elemento
-	bool Borrar(TPoro &);
+	bool Borrar(const TPoro &);
 	// Borra el elemento que ocupa la posición indicada
-	bool Borrar(TListaPosicion &);
+	bool Borrar(const TListaPosicion &);
 	// Obtiene el elemento que ocupa la posición indicada
 	TPoro Obtener(const TListaPosicion &) const;
 	// Devuelve true si el elemento está en la lista, false en caso contrario
-	bool Buscar(const TPoro &);
+	bool Buscar(const TPoro &) const;
 	// Devuelve la longitud de la lista
 	int Longitud() const;
 	// Devuelve la primera posición en la lista

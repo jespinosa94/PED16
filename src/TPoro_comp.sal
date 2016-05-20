@@ -1,20 +1,26 @@
-No hace nada
 ()
-(1, 2) 3.00 rojo
-(10, 20) 0.00 -
-(1, 2) 3.00 rojo
-(1, 2) 3.00 rojo
-PosicionX: 1
-PosicionY: 2
+()
+()
+()
+(2, 2) 20.00 -
+(2, 2) 20.00 -
+IGUALES
+DISTINTOS
+IGUALES
+IGUALES
+IGUALES
+PosicionX: -10
+PosicionY: -20
 Volumen: 3
-SI
-SI
+(-10, -20) 3.00 -
+LLENO
+LLENO
 VACIO
-NO VACIO
-VACIO
-NO VACIO
-VACIO
-VACIO
-VACIO
-VACIO
-VACIO
+()
+()
+IGUALES
+IGUALES
+IGUALES
+IGUALES
+IGUALES
+IGUALES

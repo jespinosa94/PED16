@@ -11,7 +11,7 @@ TNodoAVL::TNodoAVL(): item(), iz(), de() {
 	fe = 0;
 }
 
-TNodoAVL::TNodoAVL(TNodoAVL &origen) {
+TNodoAVL::TNodoAVL(const TNodoAVL &origen) {
 	CopiarNodo(origen);
 }
 
@@ -19,7 +19,7 @@ TNodoAVL::~TNodoAVL() {
 	fe = 0;
 }
 
-TNodoAVL& TNodoAVL::operator =(TNodoAVL &origen) {
+TNodoAVL& TNodoAVL::operator =(const TNodoAVL &origen) {
 	if(this != &origen)
 	{
 		(*this).~TNodoAVL();
@@ -40,7 +40,7 @@ void TNodoAVL::CopiarNodo(const TNodoAVL &origen) {
  *************************************************************************
  *************************************************************************/
 
-void TAVLPoro::InordenAux(TVectorPoro &vector, int &posicion) {
+void TAVLPoro::InordenAux(TVectorPoro &vector, int &posicion) const {
 	if(!EsVacio())
 	{
 		raiz->iz.InordenAux(vector, posicion);
@@ -50,7 +50,7 @@ void TAVLPoro::InordenAux(TVectorPoro &vector, int &posicion) {
 	}
 }
 
-void TAVLPoro::PreordenAux(TVectorPoro &vector, int &posicion) {
+void TAVLPoro::PreordenAux(TVectorPoro &vector, int &posicion) const {
 	if(!EsVacio())
 	{
 		vector[posicion] = raiz->item;
@@ -60,7 +60,7 @@ void TAVLPoro::PreordenAux(TVectorPoro &vector, int &posicion) {
 	}
 }
 
-void TAVLPoro::PostordenAux(TVectorPoro &vector, int &posicion) {
+void TAVLPoro::PostordenAux(TVectorPoro &vector, int &posicion) const {
 	if(!EsVacio())
 	{
 		raiz->iz.PostordenAux(vector, posicion);
@@ -89,7 +89,7 @@ void TAVLPoro::Copiar(const TAVLPoro &origen){
 		raiz = NULL;
 }
 
-TAVLPoro::TAVLPoro(TAVLPoro &origen) {
+TAVLPoro::TAVLPoro(const TAVLPoro &origen) {
 	Copiar(origen);
 }
 
@@ -107,7 +107,7 @@ TAVLPoro & TAVLPoro::operator=(const TAVLPoro &origen) {
 }
 
 
-bool TAVLPoro::CompruebaNodos(const TAVLPoro &otroArbol) {
+bool TAVLPoro::CompruebaNodos(const TAVLPoro &otroArbol) const {
 	if(EsVacio())
 		return true;
 	else
@@ -116,14 +116,14 @@ bool TAVLPoro::CompruebaNodos(const TAVLPoro &otroArbol) {
 	}
 }
 
-bool TAVLPoro::operator ==(const TAVLPoro &otroArbol) {
+bool TAVLPoro::operator ==(const TAVLPoro &otroArbol) const {
 	if(Nodos() == otroArbol.Nodos())
 		return CompruebaNodos(otroArbol);
 	else
 		return false;
 }
 
-bool TAVLPoro::operator !=(const TAVLPoro &otroArbol) {
+bool TAVLPoro::operator !=(const TAVLPoro &otroArbol) const{
 	return !(*this == otroArbol);
 }
 
@@ -285,7 +285,7 @@ int TAVLPoro::NodosHoja() const{
 	return a1;
 }
 
-TVectorPoro TAVLPoro::Inorden() {
+TVectorPoro TAVLPoro::Inorden() const {
 	//Posición en el vector que almacena el recorrido
 	int posicion = 1;
 	//Vector del tamaño adecuado para almacenar todos los nodos
@@ -294,7 +294,7 @@ TVectorPoro TAVLPoro::Inorden() {
 	return v;
 }
 
-TVectorPoro TAVLPoro::Preorden() {
+TVectorPoro TAVLPoro::Preorden() const {
 	//Posición en el vector que almacena el recorrido
 	int posicion = 1;
 	//Vector del tamaño adecuado para almacenar todos los nodos
@@ -303,7 +303,7 @@ TVectorPoro TAVLPoro::Preorden() {
 	return v;
 }
 
-TVectorPoro TAVLPoro::Postorden() {
+TVectorPoro TAVLPoro::Postorden() const {
 	//Posición en el vector que almacena el recorrido
 	int posicion = 1;
 	//Vector del tamaño adecuado para almacenar todos los nodos
@@ -385,14 +385,14 @@ bool TAVLPoro::Borrar(const TPoro &poro) {
 	return false;
 }
 
-TPoro TAVLPoro::Raiz() {
+TPoro TAVLPoro::Raiz() const {
 	if(!EsVacio())
 		return raiz->item;
 	else
 		return error;
 }
 
-ostream & operator<<(ostream &os, TAVLPoro &avl) {
+ostream & operator<<(ostream &os, const TAVLPoro &avl) {
 	os << avl.Inorden();
 	return os;
 }

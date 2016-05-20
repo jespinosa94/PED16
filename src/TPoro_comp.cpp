@@ -7,116 +7,174 @@ using namespace std;
 int
 main(void)
 {
-{
-  TPoro a, b, c;
+	{
+	  TPoro a, b ;
+	  TPoro c(a), d(b) ;
+	  cout << a << endl;
+	  cout << b << endl;
+	  cout << c << endl;
+	  cout << d << endl;
 
-  cout << "No hace nada" << endl;
-}
-{
-  TPoro a;
+	}
+	{
+	  TPoro a(2, 2, 20);
+	  TPoro b(2, 2, 20, NULL);
 
-  cout << a << endl;
-}
-{
-  TPoro a(1, 2, 3, "rojo");
+	  cout << a << endl;
+	  cout << b << endl;
+	}
+	{
+	  TPoro a(2, 2, 20,"rojo");
+	  TPoro b(2, 2, 20,"RoJo");
 
-  cout << a << endl;
-}
-{
-  TPoro a;
+	 if(a==b)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS" << endl;
 
-  a.Posicion(10, 20);
+	}
+	{
 
-  cout << a << endl;
-}
-{
-  TPoro a(1, 2, 3, "rojo");
-  TPoro b;
+	  TPoro a(0, 0, 0);
+	  TPoro a2(0, 0, 0, "");
 
-  b = a;
+	  TPoro b(0, 0, 0, "rojo");
+	  TPoro b2(0, 0, 0, "Rojo");
+	  TPoro b3(0, 0, 0, "RojO");
 
-  cout << a << endl;
-  cout << b << endl;
-}
-{
-  TPoro a(1, 2, 3, "rojo");
+	  if(a == a2)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS"  << endl;
 
-  cout << "PosicionX: " << a.PosicionX() << endl;
-  cout << "PosicionY: " << a.PosicionY() << endl;
-  cout << "Volumen: " << a.Volumen() << endl;
-}
-{
-  TPoro a(1, 2, 3, "rojo");
 
-  if(a.PosicionX() == 1)
-    cout << "SI" << endl;
-  else
-    cout << "NO" << endl;
+	  if ((b == b2) && (b == b3))
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS"  << endl;
+	}
+	{
+	  TPoro a(2,2,0,NULL);
+	  TPoro b(2,2,20,"aZUL");
 
-  if(a.PosicionY() == 2)
-    cout << "SI" << endl;
-  else
-    cout << "NO" << endl;
-}
-{
-  TPoro a;
+	  a.Volumen(20);
+	  a.Color("Azul");
 
-  if(a.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
+	  if(a!=b)
+	    cout << "DISTINTOS" << endl;
+	  else
+	    cout << "IGUALES" << endl;
+	}
+	{
+	  TPoro a(1,1,0,NULL);
+	  TPoro b(2,2,20,"aZUL");
 
-  a.Color("rojo");
+	  a.Posicion(2,2);
+	  a.Volumen(20);
+	  a.Color("Azul");
 
-  if(a.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
-}
-{
-  TPoro a;
+	  if(a!=b)
+	    cout << "DISTINTOS" << endl;
+	  else
+	    cout << "IGUALES" << endl;
+	}
+	{
+	  TPoro a(-10,-20,3,NULL);
 
-  if(a.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
+	  cout << "PosicionX: " << a.PosicionX() << endl;
+	  cout << "PosicionY: " << a.PosicionY() << endl;
+	  cout << "Volumen: " << a.Volumen() << endl;
+	  cout << a << endl;
+	}
+	{
+	  TPoro a;
+	  a.Color("");
+	  TPoro b(0,0,0,"");
+	  TPoro c(0,0,0,NULL);
 
-  a.Color("rojo");
+	  if(a.EsVacio())
+	    cout << "VACIO" << endl;
+	  else
+	    cout << "LLENO" << endl;
+	  if(b.EsVacio())
+	    cout << "VACIO" << endl;
+	  else
+	    cout << "LLENO" << endl;
+	  if(c.EsVacio())
+	    cout << "VACIO" << endl;
+	  else
+	    cout << "LLENO" << endl;
 
-  if(a.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
+	}
+	{
+	  TPoro a;
+	  TPoro b(0, 0, 0, NULL);
 
-  a.~TPoro();
+	  cout << a << endl;
+	  cout << b << endl;
+	}
+	{
+	  TPoro a;
+	  TPoro b(0, 0, 0, NULL);
 
-  if(a.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
-}
-{
-  TPoro a, b(0, 0, 0, NULL);
-  TPoro c(a), d(b);
+	  a.Posicion(0,0);
+	  a.Volumen(0);
+	  a.Color(NULL);
 
-  if(a.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
+	 if(a==b)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS" << endl;
 
-  if(b.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
+	  a.Color("rojo");
+	  b.Color("ROJO");
 
-  if(c.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
+	 if(a==b)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS" << endl;
 
-  if(d.EsVacio())
-    cout << "VACIO" << endl;
-  else
-    cout << "NO VACIO" << endl;
-}
+
+
+	}
+	{
+	  TPoro a(2, 2, 20,"rojo");
+	  TPoro b(2, 2, 20,"RoJo");
+	  TPoro c(2, 2, 20,"");
+	  TPoro d(2, 2, 20,NULL);
+
+	  TPoro e(c);
+	  TPoro f(d);
+
+	 if(e==c)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS" << endl;
+
+	 if(f==d)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS" << endl;
+
+	}
+	{
+	  TPoro a(2, 2, 20,"rojo");
+	  TPoro b(2, 2, 20,"RoJo");
+	  TPoro c(2, 2, 20,"");
+	  TPoro d(2, 2, 20,NULL);
+
+	  a = c;
+	  b = d;
+
+	 if(a==c)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS" << endl;
+
+	 if(b==d)
+	    cout << "IGUALES" << endl;
+	  else
+	    cout << "DISTINTOS" << endl;
+
+	}
 }

@@ -1,52 +1,44 @@
-CORRECTO CONSTRUCTOR DE COPIA
-CORRECTA ASIGNACION 
-[1 (1, 2) 1.00 rojo]
-[]
-VACIO
-NO VACIO
-VACIO
+No hace nada
 Insertado
 No insertado
-Borrado
-No borrado
-Insertado
-CORRECTA INSERCION MULTIPLE
-CORRECTA INSERCION MULTIPLE
-[1 (1, 2) 8.00 rojo 2 (1, 2) 10.00 rojo 3 (1, 2) 12.00 rojo 4 (1, 2) 20.00 rojo]
-[]
-[1 (1, 2) 8.00 rojo 2 (1, 2) 10.00 rojo 3 (1, 2) 12.00 rojo 4 (1, 2) 20.00 rojo 5 (1, 2) 28.00 rojo]
-Error NO BORRADO
-[1 (1, 2) 24.00 rojo 2 (1, 2) 26.00 rojo 3 (1, 2) 28.00 rojo]
-Encontrado = 0
-Insertado = 1
-Encontrado = 1
-Encontrado = 1
-Insertado = 0
-Borrado = 1
-Encontrado = 0
-Altura: 0
-Nodos: 0
-NodosHoja: 0
-Raiz: ()
+Altura: 3
+[1 (1, 2) 2.00 rojo 2 (1, 2) 1.00 rojo 3 (1, 2) 3.00 rojo 4 (1, 2) 4.00 rojo]
+IGUALES
+IGUALES
+[1 (1, 2) 2.00 rojo 2 (1, 2) 1.00 rojo 3 (1, 2) 3.00 rojo 4 (1, 2) 4.00 rojo]
+DISTINTOS
+Altura: 3
+[1 (1, 2) 2.00 rojo 2 (1, 2) 1.00 rojo 3 (1, 2) 3.00 rojo 4 (1, 2) 4.00 rojo]
 Altura: 1
 Nodos: 1
 NodosHoja: 1
-Raiz: (1, 2) 100.00 rojo
-Altura: 2
-Nodos: 2
-NodosHoja: 1
-Raiz: (1, 2) 100.00 rojo
+Inorden: [1 (1, 2) 1.00 rojo 2 (1, 2) 2.00 rojo 3 (1, 2) 3.00 rojo 4 (1, 2) 4.00 rojo]
+Preorden: [1 (1, 2) 3.00 rojo 2 (1, 2) 2.00 rojo 3 (1, 2) 1.00 rojo 4 (1, 2) 4.00 rojo]
+Postorden: [1 (1, 2) 1.00 rojo 2 (1, 2) 2.00 rojo 3 (1, 2) 4.00 rojo 4 (1, 2) 3.00 rojo]
+Iguales
 Altura: 3
-Nodos: 3
-NodosHoja: 1
-Raiz: (1, 2) 100.00 rojo
-Altura: 3
-Nodos: 4
-NodosHoja: 2
-Raiz: (1, 2) 100.00 rojo
-Altura: 2
-Nodos: 3
-NodosHoja: 2
-Raiz: (1, 2) 100.00 rojo
-IGUALES
-IGUALES
+Nodos: 5
+NodosHoja: 3
+No encontrado
+Encontrado
+(2, 2) 2.00 rojo
+[1 (1, 1) 1.00 rojo 2 (2, 2) 2.00 rojo 3 (3, 3) 3.00 rojo 4 (5, 5) 5.00 rojo 5 (6, 6) 6.00 rojo]
+Arbol vacio
+Elemento no borrado
+Arbol no vacio
+Elemento borrado
+Arbol vacio
+[1 (1, 2) 2.00 rojo 2 (1, 2) 1.00 rojo 3 (1, 2) 5.00 rojo 4 (1, 2) 3.00 rojo 5 (1, 2) 6.00 rojo]
+Elemento no borrado
+Elemento borrado
+(1, 2) 5.00 rojo
+[1 (1, 2) 5.00 rojo 2 (1, 2) 2.00 rojo 3 (1, 2) 3.00 rojo 4 (1, 2) 6.00 rojo]
+[1 (1, 2) 2.00 rojo 2 (1, 2) 3.00 rojo 3 (1, 2) 5.00 rojo 4 (1, 2) 6.00 rojo]
+[1 (1, 2) 3.00 rojo 2 (1, 2) 2.00 rojo 3 (1, 2) 6.00 rojo 4 (1, 2) 5.00 rojo]
+[1 (1, 2) 4.00 rojo 2 (1, 2) 2.00 rojo 3 (1, 2) 1.00 rojo 4 (1, 2) 3.00 rojo 5 (1, 2) 6.00 rojo]
+Elemento no borrado
+Elemento borrado
+(1, 2) 2.00 rojo
+[1 (1, 2) 2.00 rojo 2 (1, 2) 1.00 rojo 3 (1, 2) 4.00 rojo 4 (1, 2) 3.00 rojo]
+[1 (1, 2) 1.00 rojo 2 (1, 2) 2.00 rojo 3 (1, 2) 3.00 rojo 4 (1, 2) 4.00 rojo]
+[1 (1, 2) 1.00 rojo 2 (1, 2) 3.00 rojo 3 (1, 2) 4.00 rojo 4 (1, 2) 2.00 rojo]

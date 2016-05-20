@@ -43,19 +43,19 @@ public:
 	// Sobrecarga del operador desigualdad
 	bool operator!=(const TPoro &) const;
 	// Modifica la posición
-	void Posicion(int, int);
+	void Posicion(const int, const int);
 	// Modifica el volumen
-	void Volumen(double);
+	void Volumen(const double);
 	// Modifica el color
 	void Color(char *);
 	// Devuelve la coordenada x de la posición
-	int PosicionX();
+	int PosicionX()const;
 	// Devuelve la coordenada y de la posición
-	int PosicionY();
+	int PosicionY()const;
 	// Devuelve el volumen
 	double Volumen() const;
 	// Devuelve el color
-	char * Color();
+	char * Color() const;
 	// Devuelve cierto si el poro está vacío
 	bool EsVacio() const;
 };

@@ -77,7 +77,7 @@ bool TPoro::operator !=(const TPoro &p) const {
 	return ! (*this==p);
 }
 
-void TPoro::Posicion(int newX, int newY) {
+void TPoro::Posicion(const int newX, const int newY) {
 	x = newX;
 	y = newY;
 }
@@ -97,11 +97,11 @@ void TPoro::Color(char *newColor) {
 	}
 }
 
-int TPoro::PosicionX() {
+int TPoro::PosicionX() const {
 	return x;
 }
 
-int TPoro::PosicionY() {
+int TPoro::PosicionY() const {
 	return y;
 }
 
@@ -109,8 +109,8 @@ double TPoro::Volumen() const {
 	return volumen;
 }
 
-char* TPoro::Color() {
-	return color;  ///¿Y si es null hacer que controle y devuelva vacio?
+char* TPoro::Color() const {
+	return color;
 }
 
 void TPoro::Copy(const TPoro& p) {

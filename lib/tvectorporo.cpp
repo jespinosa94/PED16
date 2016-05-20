@@ -65,7 +65,7 @@ TVectorPoro& TVectorPoro::operator =(const TVectorPoro &tvp) {
 	return *this;
 }
 
-bool TVectorPoro::operator ==(const TVectorPoro &tvp) {
+bool TVectorPoro::operator ==(const TVectorPoro &tvp) const {
 	if(dimension != tvp.dimension)
 		return false;
 	for(int i=0; i<dimension; i++)
@@ -74,7 +74,7 @@ bool TVectorPoro::operator ==(const TVectorPoro &tvp) {
 	return true;
 }
 
-bool TVectorPoro::operator !=(const TVectorPoro &tvp) {
+bool TVectorPoro::operator !=(const TVectorPoro &tvp) const {
 	return !(*this == tvp);
 }
 
@@ -94,11 +94,11 @@ TPoro TVectorPoro::operator [](int posicion) const {
 	return error;
 }
 
-int TVectorPoro::Longitud() {
+int TVectorPoro::Longitud() const {
 	return dimension;
 }
 
-int TVectorPoro::Cantidad() {
+int TVectorPoro::Cantidad() const {
 	int posOcupadas = 0;
 	for(int i=0; i<dimension; i++){
 		if(!datos[i].EsVacio())
@@ -107,7 +107,7 @@ int TVectorPoro::Cantidad() {
 	return posOcupadas;
 }
 
-bool TVectorPoro::Redimensionar(int newSize) {
+bool TVectorPoro::Redimensionar(const int newSize) {
 	if(newSize<=0 || dimension==newSize)
 		return false;
 	else if(dimension<newSize)

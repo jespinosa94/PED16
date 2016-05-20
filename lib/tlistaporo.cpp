@@ -67,7 +67,7 @@ bool TListaPosicion::operator ==(const TListaPosicion &tlp) const {
 	return pos == tlp.pos;
 }
 
-TListaPosicion TListaPosicion::Anterior(){
+TListaPosicion TListaPosicion::Anterior() const {
 	TListaPosicion aux;
 	if(pos->anterior != NULL)
 		aux.pos = pos->anterior;
@@ -75,7 +75,7 @@ TListaPosicion TListaPosicion::Anterior(){
 	return aux;
 }
 
-TListaPosicion TListaPosicion::Siguiente(){
+TListaPosicion TListaPosicion::Siguiente() const {
 	TListaPosicion aux;
 	if(pos->siguiente != NULL)
 		aux.pos = pos->siguiente;
@@ -149,7 +149,7 @@ bool TListaPoro::operator ==(const TListaPoro &poroLista) const{
 	return false;
 }
 
-TListaPoro TListaPoro::operator +(TListaPoro &poroLista) {
+TListaPoro TListaPoro::operator +(const TListaPoro &poroLista) {
 	TListaPoro nuevaLista(*this);
 	TListaPosicion posLista = poroLista.Primera();
 	while(!posLista.EsVacia())
@@ -160,7 +160,7 @@ TListaPoro TListaPoro::operator +(TListaPoro &poroLista) {
 	return nuevaLista;
 }
 
-TListaPoro TListaPoro::operator -(TListaPoro &poroLista) {
+TListaPoro TListaPoro::operator -(const TListaPoro &poroLista) {
 	TListaPoro nuevaLista(*this);
 	TListaPosicion posLista = poroLista.Primera();
 	while(!posLista.EsVacia())
@@ -242,7 +242,7 @@ bool TListaPoro::Insertar(const TPoro &poro) {
 	return false;
 }
 
-TListaPosicion TListaPoro::ObtenerPosicion(TPoro &poro)
+TListaPosicion TListaPoro::ObtenerPosicion(const TPoro &poro)
 {
 	TListaPosicion aux = Primera();
 	while(!aux.Siguiente().EsVacia())
@@ -258,7 +258,7 @@ TListaPosicion TListaPoro::ObtenerPosicion(TPoro &poro)
 /*
  * Se guarda en una posicion el primer nodo para despues de la asignación no perderlo y borrarlo
  */
-void TListaPoro::BorrarCabeza(TListaPosicion &aux) {
+void TListaPoro::BorrarCabeza(const TListaPosicion &aux) {
 	if(Longitud() == 1)
 	{
 		(*this).~TListaPoro();
@@ -272,7 +272,7 @@ void TListaPoro::BorrarCabeza(TListaPosicion &aux) {
 
 }
 
-void TListaPoro::BorrarCentro(TListaPosicion &borraPos) {
+void TListaPoro::BorrarCentro(const TListaPosicion &borraPos) {
 	//La declaración de abajo es simplemente para simplificar que si a b c (queremos borrar b
 	//a sería anterior y c siguiente)
 	TListaNodo *anterior = borraPos.Anterior().pos;
@@ -283,14 +283,14 @@ void TListaPoro::BorrarCentro(TListaPosicion &borraPos) {
 	delete borraPos.pos;
 }
 
-void TListaPoro::BorrarCola(TListaPosicion &aux) {
+void TListaPoro::BorrarCola(const TListaPosicion &aux) {
 	ultimo = ultimo->anterior;
 	ultimo->siguiente = NULL;
 	aux.pos->~TListaNodo();
 	delete aux.pos;
 }
 
-bool TListaPoro::Borrar(TPoro &poro) {
+bool TListaPoro::Borrar(const TPoro &poro) {
 	if(Buscar(poro))
 	{
 		TListaPosicion borraPos = ObtenerPosicion(poro);
@@ -300,7 +300,7 @@ bool TListaPoro::Borrar(TPoro &poro) {
 	return false;
 }
 
-bool TListaPoro::Borrar(TListaPosicion &borraPos) {
+bool TListaPoro::Borrar(const TListaPosicion &borraPos) {
 	if(Buscar(borraPos.pos->e))
 	{
 		if(borraPos.pos == primero)
@@ -318,7 +318,7 @@ TPoro TListaPoro::Obtener(const TListaPosicion &obtenerPos) const {
 	return obtenerPos.pos->e;
 }
 
-bool TListaPoro::Buscar(const TPoro &poro) {
+bool TListaPoro::Buscar(const TPoro &poro) const {
 	TListaNodo *aux = primero;
 	while(aux)
 	{

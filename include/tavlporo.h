@@ -12,17 +12,17 @@ class TNodoAVL;
 class TAVLPoro {
 	friend class TNodoAVL;
 	// Sobrecarga del operador salida
-	friend ostream & operator<<(ostream &, TAVLPoro &);
+	friend ostream & operator<<(ostream &, const TAVLPoro &);
 private:
 	// Puntero al nodo raíz
 	TNodoAVL *raiz;
 	TPoro error;
 	// Devuelve el recorrido en inorden
-	void InordenAux(TVectorPoro &, int &);
+	void InordenAux(TVectorPoro &, int &) const;
 	// Devuelve el recorrido en preorden
-	void PreordenAux(TVectorPoro &, int &);
+	void PreordenAux(TVectorPoro &, int &) const;
 	// Devuelve el recorrido en postorden
-	void PostordenAux(TVectorPoro &, int &);
+	void PostordenAux(TVectorPoro &, int &) const;
 	//Comprueba que no haya nodos con el mismo volumen
 	bool FiltraVolumen(const int &);
 	//Busca la posición en la que debe ir el nuevo elemento y lo inserta
@@ -44,7 +44,7 @@ private:
     //Rotación DI de un árbol (+2, -1)
     void RotaDI();
     //Auxiliar que busca los nodos de un arbol en otro
-    bool CompruebaNodos(const TAVLPoro &otroArbol);
+    bool CompruebaNodos(const TAVLPoro &otroArbol) const;
     //Borrado del árbol binario de búsqueda
     bool BorrarAB(const TPoro &poro);
     bool EsHoja() const;
@@ -55,16 +55,16 @@ public:
 	//Constructor por defecto
 	TAVLPoro ();
 	//Constructor copia
-	TAVLPoro (TAVLPoro &);
+	TAVLPoro (const TAVLPoro &);
 	//Destructor
 	~ TAVLPoro ();
 	// Sobrecarga del operador asignación
 	TAVLPoro & operator=(const TAVLPoro &);
 
 	// Sobrecarga del operador igualdad
-	bool operator==(const TAVLPoro &);
+	bool operator==(const TAVLPoro &) const;
 	// Sobrecarga del operador desigualdad
-	bool operator!=(const TAVLPoro &);
+	bool operator!=(const TAVLPoro &) const;
 	// Devuelve TRUE si el árbol está vacío, FALSE en caso contrario
 	bool EsVacio() const;
 	// Inserta el elemento en el árbol
@@ -78,15 +78,15 @@ public:
 	// Devuelve el número de nodos hoja en el árbol (la raíz puede ser nodo hoja)
 	int NodosHoja() const;
 	// Devuelve el recorrido en inorden sobre un vector
-	TVectorPoro Inorden();
+	TVectorPoro Inorden() const;
 	// Devuelve el recorrido en preorden sobre un vector
-	TVectorPoro Preorden();
+	TVectorPoro Preorden() const;
 	// Devuelve el recorrido en postorden sobre un vector
-	TVectorPoro Postorden();
+	TVectorPoro Postorden() const;
 	// Borra un TPoro del árbol AVL
 	bool Borrar(const TPoro &);
 	// Devuelve el elemento TPoro raíz del árbol AVL
-	TPoro Raiz();
+	TPoro Raiz() const;
 };
 class TNodoAVL {
 	friend class TAVLPoro;
@@ -103,10 +103,10 @@ public:
 	//Constructor por defecto
 	TNodoAVL ();
 	//Constructor copia
-	TNodoAVL (TNodoAVL &);
+	TNodoAVL (const TNodoAVL &);
 	//Destructor
 	~TNodoAVL ();
 	// Sobrecarga del operador asignación
-	TNodoAVL & operator=( TNodoAVL &);
+	TNodoAVL & operator=(const TNodoAVL &);
 };
 #endif /* INCLUDE_TAVLPORO_H_ */
