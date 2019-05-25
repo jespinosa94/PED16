@@ -1,4 +1,6 @@
 # PED16
+## Se ruega a quien descargue o haga uso de este código le de una Star al proyecto. Gracias.
+
 * Prácticas de la asignatura Programación y estructuras de datos
 
 * Contexto de Poros.
